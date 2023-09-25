@@ -18,7 +18,7 @@ public class LoadoutGun extends Base {
     private MetaList metaList;
     @ManyToOne
     @JoinColumn(name = "loadOut_id")
-    private LoadOut loadOut;
+    private Loadout loadOut;
     private String name;
     private String range;
     private String attachment_1;

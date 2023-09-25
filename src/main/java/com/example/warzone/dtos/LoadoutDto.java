@@ -2,17 +2,17 @@ package com.example.warzone.dtos;
 
 import org.springframework.data.annotation.CreatedDate;
 
-public class LoadOutDto {
+public class LoadoutDto {
     private String perks;
     private String guns;
     private String description;
-    private CreatedDate date;
+    private String date;
     private String updatedAt;
     private String enabled;
 
-    protected LoadOutDto() {};
+    protected LoadoutDto() {};
 
-    public LoadOutDto(String perks, String guns, String description, CreatedDate date, String updatedAt, String enabled) {
+    public LoadoutDto(String perks, String guns, String description, String date, String updatedAt, String enabled) {
         this.perks = perks;
         this.guns = guns;
         this.description = description;
@@ -45,11 +45,11 @@ public class LoadOutDto {
         this.description = description;
     }
 
-    public CreatedDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(CreatedDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

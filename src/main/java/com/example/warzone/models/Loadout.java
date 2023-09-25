@@ -3,12 +3,10 @@ package com.example.warzone.models;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import org.springframework.data.annotation.CreatedDate;
 
-import java.util.Date;
 import java.util.List;
 
-public class LoadOut extends Base{
+public class Loadout extends Base{
     @OneToMany(mappedBy = "loadout")
     private List<LoadoutGun> loadoutGun;
     @OneToMany(mappedBy = "loadout")
@@ -23,7 +21,7 @@ public class LoadOut extends Base{
     private String updatedAt;
     private String enabled;
 
-    protected LoadOut() {};
+    protected Loadout() {};
 
     public String getPerks1() {
         return perks1;

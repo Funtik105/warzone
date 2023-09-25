@@ -1,6 +1,5 @@
 package com.example.warzone.dtos;
 
-import java.awt.*;
 
 public class UsersDto {
     private String email;
@@ -10,11 +9,11 @@ public class UsersDto {
     private String visibility;
     private String avatar;
     private String password;
-    private int folowers;
+    private int followers;
 
     protected UsersDto() {};
 
-    public UsersDto(String email, String name, String nickname, String description, String visibility, String avatar, String password, int folowers) {
+    public UsersDto(String email, String name, String nickname, String description, String visibility, String avatar, String password, int followers) {
         this.email = email;
         this.name = name;
         this.nickname = nickname;
@@ -22,7 +21,7 @@ public class UsersDto {
         this.visibility = visibility;
         this.avatar = avatar;
         this.password = password;
-        this.folowers = folowers;
+        this.followers = followers;
     }
 
     public String getEmail() {
@@ -81,12 +80,12 @@ public class UsersDto {
         this.password = password;
     }
 
-    public int getFolowers() {
-        return folowers;
+    public int getFollowers() {
+        return followers;
     }
 
-    public void setFolowers(int folowers) {
-        this.folowers = folowers;
+    public void setFollowers(int followers) {
+        this.followers = followers;
     }
 
     @Override
@@ -99,7 +98,7 @@ public class UsersDto {
                 ", visibility='" + visibility + '\'' +
                 ", avatar=" + avatar +
                 ", password='" + password + '\'' +
-                ", folowers=" + folowers +
+                ", followers=" + followers +
                 '}';
     }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Users extends Base{
     @OneToMany(mappedBy = "user")
-    private List<LoadOut> loadOuts;
+    private List<Loadout> loadOuts;
     private String email;
     private String name;
     private String nickname;

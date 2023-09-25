@@ -6,7 +6,7 @@ import jakarta.persistence.ManyToOne;
 public class Perks extends Base{
     @ManyToOne
     @JoinColumn(name = "loadOut_id")
-    private LoadOut loadOut;
+    private Loadout loadOut;
     private String type;
     private String name;
     private String description;
