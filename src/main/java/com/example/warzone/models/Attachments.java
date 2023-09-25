@@ -1,6 +1,12 @@
 package com.example.warzone.models;
 
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
 public class Attachments extends Base{
+    @ManyToOne
+    @JoinColumn(name = "loadoutGun_id")
+    private LoadoutGun loadoutGun;
     private String name;
     private String weaponsToOpen;
     private short levelsToOpen;

@@ -1,10 +1,26 @@
 package com.example.warzone.models;
 
-import javax.swing.plaf.basic.BasicDesktopIconUI;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+
+import java.util.List;
 
 public class LoadoutGun extends Base {
+    @OneToOne(mappedBy = "loadoutGun")
+    @JoinColumn(name = "gun_id",referencedColumnName = "id")
+    private Gun guns;
+    @OneToMany(mappedBy = "loadoutGun")
+    private List<Attachments> attachments;
+    @ManyToOne
+    @JoinColumn(name = "metalist_id")
+    private MetaList metaList;
+    @ManyToOne
+    @JoinColumn(name = "loadOut_id")
+    private LoadOut loadOut;
     private String name;
-    private String rage;
+    private String range;
     private String attachment_1;
     private String attachment_customization_1;
     private String attachment_2;
@@ -27,11 +43,11 @@ public class LoadoutGun extends Base {
     }
 
     public String getRage() {
-        return rage;
+        return range;
     }
 
-    public void setRage(String rage) {
-        this.rage = rage;
+    public void setRage(String range) {
+        this.range = range;
     }
 
     public String getAttachment_1() {

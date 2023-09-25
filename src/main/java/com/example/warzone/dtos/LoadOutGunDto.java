@@ -2,7 +2,7 @@ package com.example.warzone.dtos;
 
 public class LoadOutGunDto {
     private String name;
-    private String rage;
+    private String range;
     private String attachment_1;
     private String attachment_customization_1;
     private String attachment_2;
@@ -16,9 +16,9 @@ public class LoadOutGunDto {
 
     protected LoadOutGunDto() {};
 
-    public LoadOutGunDto(String name, String rage, String attachment_1, String attachment_customization_1, String attachment_2, String attachment_customization_2, String attachment_3, String attachment_customization_3, String attachment_4, String attachment_customization_4, String attachment_5, String attachment_customization_5) {
+    public LoadOutGunDto(String name, String range, String attachment_1, String attachment_customization_1, String attachment_2, String attachment_customization_2, String attachment_3, String attachment_customization_3, String attachment_4, String attachment_customization_4, String attachment_5, String attachment_customization_5) {
         this.name = name;
-        this.rage = rage;
+        this.range = range;
         this.attachment_1 = attachment_1;
         this.attachment_customization_1 = attachment_customization_1;
         this.attachment_2 = attachment_2;
@@ -39,12 +39,12 @@ public class LoadOutGunDto {
         this.name = name;
     }
 
-    public String getRage() {
-        return rage;
+    public String getRange() {
+        return range;
     }
 
-    public void setRage(String rage) {
-        this.rage = rage;
+    public void setRange(String range) {
+        this.range = range;
     }
 
     public String getAttachment_1() {
@@ -131,7 +131,7 @@ public class LoadOutGunDto {
     public String toString() {
         return "LoadOutGunDto{" +
                 "name='" + name + '\'' +
-                ", rage='" + rage + '\'' +
+                ", range='" + range + '\'' +
                 ", attachment_1='" + attachment_1 + '\'' +
                 ", attachment_customization_1='" + attachment_customization_1 + '\'' +
                 ", attachment_2='" + attachment_2 + '\'' +

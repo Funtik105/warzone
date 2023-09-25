@@ -2,7 +2,7 @@ package com.example.warzone.dtos;
 
 public class MetaListDto {
     private String name;
-    private float range;
+    private String range;
     private String gun1;
     private String category;
     private String attachment_1;
@@ -18,7 +18,7 @@ public class MetaListDto {
 
     protected MetaListDto() {};
 
-    public MetaListDto(String name, float range, String gun1, String category, String attachment_1, String attachment_customization_1, String attachment_2, String attachment_customization_2, String attachment_3, String attachment_customization_3, String attachment_4, String attachment_customization_4, String attachment_5, String attachment_customization_5) {
+    public MetaListDto(String name, String range, String gun1, String category, String attachment_1, String attachment_customization_1, String attachment_2, String attachment_customization_2, String attachment_3, String attachment_customization_3, String attachment_4, String attachment_customization_4, String attachment_5, String attachment_customization_5) {
         this.name = name;
         this.range = range;
         this.gun1 = gun1;
@@ -43,11 +43,11 @@ public class MetaListDto {
         this.name = name;
     }
 
-    public float getRange() {
+    public String getRange() {
         return range;
     }
 
-    public void setRange(float range) {
+    public void setRange(String range) {
         this.range = range;
     }
 

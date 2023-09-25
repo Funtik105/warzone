@@ -1,8 +1,14 @@
 package com.example.warzone.models;
 
+import jakarta.persistence.OneToMany;
+
+import java.util.List;
+
 public class MetaList extends Base{
+    @OneToMany(mappedBy = "metaList")
+    private List<LoadoutGun> loadoutGuns;
     private String name;
-    private float range;
+    private String range;
     private String gun1;
     private String category;
     private String attachment_1;
@@ -26,11 +32,11 @@ public class MetaList extends Base{
         this.name = name;
     }
 
-    public float getRange() {
+    public String getRange() {
         return range;
     }
 
-    public void setRange(float range) {
+    public void setRange(String range) {
         this.range = range;
     }
 

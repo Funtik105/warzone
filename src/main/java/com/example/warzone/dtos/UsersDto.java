@@ -8,13 +8,13 @@ public class UsersDto {
     private String nickname;
     private String description;
     private String visibility;
-    private Image avatar;
+    private String avatar;
     private String password;
     private int folowers;
 
     protected UsersDto() {};
 
-    public UsersDto(String email, String name, String nickname, String description, String visibility, Image avatar, String password, int folowers) {
+    public UsersDto(String email, String name, String nickname, String description, String visibility, String avatar, String password, int folowers) {
         this.email = email;
         this.name = name;
         this.nickname = nickname;
@@ -65,11 +65,11 @@ public class UsersDto {
         this.visibility = visibility;
     }
 
-    public Image getAvatar() {
+    public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(Image avatar) {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 

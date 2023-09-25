@@ -1,16 +1,18 @@
 package com.example.warzone.models;
 
-import org.apache.catalina.User;
+import jakarta.persistence.OneToMany;
 
-import java.awt.*;
+import java.util.List;
 
 public class Users extends Base{
+    @OneToMany(mappedBy = "user")
+    private List<LoadOut> loadOuts;
     private String email;
     private String name;
     private String nickname;
     private String description;
     private String visibility;
-    private Image avatar;
+    private String avatar;
     private String password;
     private int folowers;
 
@@ -56,11 +58,11 @@ public class Users extends Base{
         this.visibility = visibility;
     }
 
-    public Image getAvatar() {
+    public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(Image avatar) {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 
