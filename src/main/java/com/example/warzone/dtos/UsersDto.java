@@ -2,6 +2,7 @@ package com.example.warzone.dtos;
 
 
 public class UsersDto {
+    private Long id;
     private String email;
     private String name;
     private String nickname;
@@ -13,7 +14,8 @@ public class UsersDto {
 
     protected UsersDto() {};
 
-    public UsersDto(String email, String name, String nickname, String description, String visibility, String avatar, String password, int followers) {
+    public UsersDto(Long id,String email, String name, String nickname, String description, String visibility, String avatar, String password, int followers) {
+        this.id = id;
         this.email = email;
         this.name = name;
         this.nickname = nickname;
@@ -22,6 +24,14 @@ public class UsersDto {
         this.avatar = avatar;
         this.password = password;
         this.followers = followers;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getEmail() {

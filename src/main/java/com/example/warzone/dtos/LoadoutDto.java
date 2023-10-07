@@ -3,6 +3,7 @@ package com.example.warzone.dtos;
 import org.springframework.data.annotation.CreatedDate;
 
 public class LoadoutDto {
+    private Long id;
     private String perks;
     private String guns;
     private String description;
@@ -12,13 +13,22 @@ public class LoadoutDto {
 
     protected LoadoutDto() {};
 
-    public LoadoutDto(String perks, String guns, String description, String date, String updatedAt, String enabled) {
+    public LoadoutDto(Long id,String perks, String guns, String description, String date, String updatedAt, String enabled) {
+        this.id = id;
         this.perks = perks;
         this.guns = guns;
         this.description = description;
         this.date = date;
         this.updatedAt = updatedAt;
         this.enabled = enabled;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getPerks() {

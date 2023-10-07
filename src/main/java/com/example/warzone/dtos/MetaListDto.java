@@ -1,6 +1,7 @@
 package com.example.warzone.dtos;
 
 public class MetaListDto {
+    private Long id;
     private String name;
     private String range;
     private String gun1;
@@ -18,7 +19,8 @@ public class MetaListDto {
 
     protected MetaListDto() {};
 
-    public MetaListDto(String name, String range, String gun1, String category, String attachment_1, String attachment_customization_1, String attachment_2, String attachment_customization_2, String attachment_3, String attachment_customization_3, String attachment_4, String attachment_customization_4, String attachment_5, String attachment_customization_5) {
+    public MetaListDto(Long id,String name, String range, String gun1, String category, String attachment_1, String attachment_customization_1, String attachment_2, String attachment_customization_2, String attachment_3, String attachment_customization_3, String attachment_4, String attachment_customization_4, String attachment_5, String attachment_customization_5) {
+        this.id = id;
         this.name = name;
         this.range = range;
         this.gun1 = gun1;
@@ -33,6 +35,14 @@ public class MetaListDto {
         this.attachment_customization_4 = attachment_customization_4;
         this.attachment_5 = attachment_5;
         this.attachment_customization_5 = attachment_customization_5;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

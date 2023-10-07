@@ -1,16 +1,26 @@
 package com.example.warzone.dtos;
 
 public class GunDto {
+    private Long id;
     private String name;
     private String category;
     private String platform;
 
     protected GunDto() {};
 
-    public GunDto(String name, String category, String platform) {
+    public GunDto(Long id,String name, String category, String platform) {
+        this.id = id;
         this.name = name;
         this.category = category;
         this.platform = platform;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

@@ -1,16 +1,25 @@
 package com.example.warzone.dtos;
 
 public class PerksDto {
+    private Long id;
     private String type;
     private String name;
     private String description;
 
     protected PerksDto() {};
 
-    public PerksDto(String type, String name, String description) {
+    public PerksDto(Long id,String type, String name, String description) {
         this.type = type;
         this.name = name;
         this.description = description;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getType() {
