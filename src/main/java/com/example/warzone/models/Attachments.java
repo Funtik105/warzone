@@ -1,8 +1,9 @@
 package com.example.warzone.models;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-
+@Entity
 public class Attachments extends Base{
     @ManyToOne
     @JoinColumn(name = "loadoutGun_id")

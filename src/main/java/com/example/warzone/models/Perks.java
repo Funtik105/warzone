@@ -1,12 +1,13 @@
 package com.example.warzone.models;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-
+@Entity
 public class Perks extends Base{
     @ManyToOne
-    @JoinColumn(name = "loadOut_id")
-    private Loadout loadOut;
+    @JoinColumn(name = "loadout_id")
+    private Loadout loadout;
     private String type;
     private String name;
     private String description;

@@ -1,14 +1,15 @@
 package com.example.warzone.models;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 import java.util.List;
-
+@Entity
 public class NerfsAndBuffs extends Base{
     @ManyToOne
     @JoinColumn(name = "gun_id")
-    private Gun guns;
+    private Gun gun;
     private String date;
     private String nameGun;
     private boolean status;

@@ -1,14 +1,15 @@
 package com.example.warzone.models;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 import java.util.List;
-
+@Entity
 public class Loadout extends Base{
     @OneToMany(mappedBy = "loadout")
-    private List<LoadoutGun> loadoutGun;
+    private List<LoadoutGun> loadoutGuns;
     @OneToMany(mappedBy = "loadout")
     private List<Perks> perks;
     @ManyToOne

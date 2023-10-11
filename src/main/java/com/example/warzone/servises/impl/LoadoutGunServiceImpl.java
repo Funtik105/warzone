@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class LoadoutGunServiceImpl implements LoadoutGunService {
     @Autowired
     LoadoutGunRepository loadoutGunRepository;
+    @Autowired
     private ModelMapper modelMapper;
 
     public LoadoutGunServiceImpl(LoadoutGunRepository loadoutGunRepository) {

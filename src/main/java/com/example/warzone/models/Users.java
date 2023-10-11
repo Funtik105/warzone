@@ -1,9 +1,10 @@
 package com.example.warzone.models;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
 import java.util.List;
-
+@Entity
 public class Users extends Base{
     @OneToMany(mappedBy = "user")
     private List<Loadout> loadOuts;

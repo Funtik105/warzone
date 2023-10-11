@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class PerksServiceImpl implements PerksService {
     @Autowired
     PerksRepository perksRepository;
+    @Autowired
     private ModelMapper modelMapper;
     public PerksServiceImpl(PerksRepository perksRepository){
         this.perksRepository = perksRepository;

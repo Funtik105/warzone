@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class MetaListServiceImpl implements MetaListService {
     @Autowired
     MetaListRepository metaListRepository;
+    @Autowired
     private ModelMapper modelMapper;
 
     public MetaListServiceImpl(MetaListRepository metaListRepository) {

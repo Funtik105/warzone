@@ -1,9 +1,10 @@
 package com.example.warzone.models;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
 import java.util.List;
-
+@Entity
 public class MetaList extends Base{
     @OneToMany(mappedBy = "metaList")
     private List<LoadoutGun> loadoutGuns;

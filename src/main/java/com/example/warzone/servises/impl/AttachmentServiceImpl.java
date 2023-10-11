@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class AttachmentServiceImpl implements AttachmentService {
     @Autowired
     AttachmentRepository attachmentRepository;
+    @Autowired
     private ModelMapper modelMapper;
 
     public AttachmentServiceImpl(AttachmentRepository attachmentRepository){ this.attachmentRepository = attachmentRepository; }

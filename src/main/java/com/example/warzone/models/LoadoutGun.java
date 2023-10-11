@@ -1,24 +1,21 @@
 package com.example.warzone.models;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
 import java.util.List;
-
+@Entity
 public class LoadoutGun extends Base {
-    @OneToOne(mappedBy = "loadoutGun")
-    @JoinColumn(name = "gun_id",referencedColumnName = "id")
-    private Gun guns;
+    @OneToOne
+    @JoinColumn(name = "gun_id")
+    private Gun gun;
     @OneToMany(mappedBy = "loadoutGun")
     private List<Attachments> attachments;
     @ManyToOne
     @JoinColumn(name = "metalist_id")
     private MetaList metaList;
     @ManyToOne
-    @JoinColumn(name = "loadOut_id")
-    private Loadout loadOut;
+    @JoinColumn(name = "loadout_id")
+    private Loadout loadout;
     private String name;
     private String range;
     private String attachment_1;
@@ -42,11 +39,11 @@ public class LoadoutGun extends Base {
         this.name = name;
     }
 
-    public String getRage() {
+    public String getRange() {
         return range;
     }
 
-    public void setRage(String range) {
+    public void setRange(String range) {
         this.range = range;
     }
 

@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class NerfsAndBuffsServiceImpl implements NerfsAndBuffsService {
     @Autowired
     NerfsAndBuffsRepository nerfsAndBuffsRepository;
+    @Autowired
     private ModelMapper modelMapper;
     public NerfsAndBuffsServiceImpl(NerfsAndBuffsRepository nerfsAndBuffsRepository){this.nerfsAndBuffsRepository = nerfsAndBuffsRepository;}
     @Override

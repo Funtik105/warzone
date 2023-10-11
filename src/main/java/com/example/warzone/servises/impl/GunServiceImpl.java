@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class GunServiceImpl implements GunService {
     @Autowired
     GunRepository gunRepository;
+    @Autowired
     private ModelMapper modelMapper;
 
     public GunServiceImpl(GunRepository gunRepository){this.gunRepository = gunRepository;}

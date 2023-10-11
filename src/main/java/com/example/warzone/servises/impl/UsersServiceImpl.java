@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class UsersServiceImpl implements UsersService {
     @Autowired
     UsersRepository usersRepository;
+    @Autowired
     private ModelMapper modelMapper;
     public UsersServiceImpl(UsersRepository usersRepository){
         this.usersRepository = usersRepository;

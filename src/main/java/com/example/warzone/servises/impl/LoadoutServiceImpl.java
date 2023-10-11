@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class LoadoutServiceImpl implements LoadoutService {
     @Autowired
     LoadoutRepository loadoutRepository;
+    @Autowired
     private ModelMapper modelMapper;
     public LoadoutServiceImpl(LoadoutRepository loadoutRepository){
         this.loadoutRepository = loadoutRepository;
