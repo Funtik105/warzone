@@ -4,6 +4,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 public class LoadoutDto {
     private Long id;
+    private UsersDto user;
     private String perks;
     private String guns;
     private String description;
@@ -13,8 +14,9 @@ public class LoadoutDto {
 
     protected LoadoutDto() {};
 
-    public LoadoutDto(Long id,String perks, String guns, String description, String date, String updatedAt, String enabled) {
+    public LoadoutDto(Long id, UsersDto user, String perks, String guns, String description, String date, String updatedAt, String enabled) {
         this.id = id;
+        this.user = user;
         this.perks = perks;
         this.guns = guns;
         this.description = description;
@@ -29,6 +31,14 @@ public class LoadoutDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public UsersDto getUser() {
+        return user;
+    }
+
+    public void setUser(UsersDto user) {
+        this.user = user;
     }
 
     public String getPerks() {
@@ -81,11 +91,13 @@ public class LoadoutDto {
 
     @Override
     public String toString() {
-        return "LoadOutDto{" +
-                "perks='" + perks + '\'' +
+        return "LoadoutDto{" +
+                "id=" + id +
+                ", user=" + user +
+                ", perks='" + perks + '\'' +
                 ", guns='" + guns + '\'' +
                 ", description='" + description + '\'' +
-                ", date=" + date +
+                ", date='" + date + '\'' +
                 ", updatedAt='" + updatedAt + '\'' +
                 ", enabled='" + enabled + '\'' +
                 '}';

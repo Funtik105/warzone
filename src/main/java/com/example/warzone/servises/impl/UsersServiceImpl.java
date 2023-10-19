@@ -60,4 +60,8 @@ public class UsersServiceImpl implements UsersService {
             throw new UsersNotFoundException(id);
         }
     }
+    @Override
+    public List<UsersDto> findAllByFollowers(int followers) {
+        return usersRepository.findAllByFollowers(followers).stream().map((s) -> modelMapper.map(s, UsersDto.class)).collect(Collectors.toList());
+    }
 }

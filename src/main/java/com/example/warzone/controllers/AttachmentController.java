@@ -4,7 +4,10 @@ import com.example.warzone.controllers.exceptions.AttachmentNotFoundException;
 import com.example.warzone.dtos.AttachmentsDto;
 import com.example.warzone.servises.AttachmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/attachments")
@@ -30,5 +33,17 @@ public class AttachmentController {
     @DeleteMapping("/{id}")
     void delete(@PathVariable Long id){
         attachmentService.delete(id);
+    }
+
+    @GetMapping("/byName")
+    public ResponseEntity<List<AttachmentsDto>> getAttachmentByName(@RequestParam String name) {
+        List<AttachmentsDto> attachments = attachmentService.findAllByName(name);
+        return ResponseEntity.ok(attachments);
+    }
+
+    @GetMapping("/byWeapons")
+    public ResponseEntity<List<AttachmentsDto>> getAttachmentByWeaponsToOpen(@RequestParam String weaponsToOpen) {
+        List<AttachmentsDto> attachments = attachmentService.findAllByWeaponsToOpen(weaponsToOpen);
+        return ResponseEntity.ok(attachments);
     }
 }

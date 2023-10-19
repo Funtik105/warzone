@@ -2,13 +2,16 @@ package com.example.warzone.dtos;
 
 public class PerksDto {
     private Long id;
+    private LoadoutDto loadout;
     private String type;
     private String name;
     private String description;
 
     protected PerksDto() {};
 
-    public PerksDto(Long id,String type, String name, String description) {
+    public PerksDto(Long id, LoadoutDto loadout, String type, String name, String description) {
+        this.id = id;
+        this.loadout = loadout;
         this.type = type;
         this.name = name;
         this.description = description;
@@ -20,6 +23,14 @@ public class PerksDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public LoadoutDto getLoadout() {
+        return loadout;
+    }
+
+    public void setLoadout(LoadoutDto loadout) {
+        this.loadout = loadout;
     }
 
     public String getType() {
@@ -49,7 +60,9 @@ public class PerksDto {
     @Override
     public String toString() {
         return "PerksDto{" +
-                "type='" + type + '\'' +
+                "id=" + id +
+                ", loadout=" + loadout +
+                ", type='" + type + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 '}';

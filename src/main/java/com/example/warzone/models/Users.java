@@ -15,7 +15,7 @@ public class Users extends Base{
     private String visibility;
     private String avatar;
     private String password;
-    private int folowers;
+    private int followers;
 
     protected Users() {};
 
@@ -75,11 +75,11 @@ public class Users extends Base{
         this.password = password;
     }
 
-    public int getFolowers() {
-        return folowers;
+    public int getFollowers() {
+        return followers;
     }
 
-    public void setFolowers(int folowers) {
-        this.folowers = folowers;
+    public void setFollowers(int folowers) {
+        this.followers = folowers;
     }
 }

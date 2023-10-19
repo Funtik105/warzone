@@ -2,6 +2,7 @@ package com.example.warzone.dtos;
 
 public class AttachmentsDto {
     private Long id;
+    private LoadoutGunDto loadoutGun;
     private String name;
     private String weaponsToOpen;
     private short levelsToOpen;
@@ -11,8 +12,9 @@ public class AttachmentsDto {
 
     protected AttachmentsDto() {};
 
-    public AttachmentsDto(Long id ,String name, String weaponsToOpen, short levelsToOpen, String advantages, String disadvantages, String settingLimits) {
+    public AttachmentsDto(Long id, LoadoutGunDto loadoutGun, String name, String weaponsToOpen, short levelsToOpen, String advantages, String disadvantages, String settingLimits) {
         this.id = id;
+        this.loadoutGun = loadoutGun;
         this.name = name;
         this.weaponsToOpen = weaponsToOpen;
         this.levelsToOpen = levelsToOpen;
@@ -27,6 +29,14 @@ public class AttachmentsDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public LoadoutGunDto getLoadoutGun() {
+        return loadoutGun;
+    }
+
+    public void setLoadoutGun(LoadoutGunDto loadoutGun) {
+        this.loadoutGun = loadoutGun;
     }
 
     public String getName() {
@@ -80,7 +90,9 @@ public class AttachmentsDto {
     @Override
     public String toString() {
         return "AttachmentsDto{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", loadoutGun=" + loadoutGun +
+                ", name='" + name + '\'' +
                 ", weaponsToOpen='" + weaponsToOpen + '\'' +
                 ", levelsToOpen=" + levelsToOpen +
                 ", advantages='" + advantages + '\'' +

@@ -11,4 +11,6 @@ public interface UsersService {
     UsersDto register(UsersDto usersDto);
     UsersDto update(UsersDto usersDto);
     void delete(Long id);
+    List<UsersDto> findAllByFollowers(int followers);
+
 }

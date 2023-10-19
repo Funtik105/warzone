@@ -57,4 +57,28 @@ public class AttachmentServiceImpl implements AttachmentService {
             throw new AttachmentNotFoundException(id);
         }
     }
+    @Override
+    public List<AttachmentsDto> findAllByName(String name) {
+        return attachmentRepository.findAllByName(name).stream().map((s) -> modelMapper.map(s, AttachmentsDto.class)).collect(Collectors.toList());
+    }
+    @Override
+    public List<AttachmentsDto> findAllByWeaponsToOpen(String weaponsToOpen) {
+        return attachmentRepository.findAllByWeaponsToOpen(weaponsToOpen).stream().map((s) -> modelMapper.map(s, AttachmentsDto.class)).collect(Collectors.toList());
+    }
+    @Override
+    public List<AttachmentsDto> findAllByLevelsToOpen(short levelsToOpen) {
+        return attachmentRepository.findAllByLevelsToOpen(levelsToOpen).stream().map((s) -> modelMapper.map(s, AttachmentsDto.class)).collect(Collectors.toList());
+    }
+    @Override
+    public List<AttachmentsDto> findAllByAdvantages(String advantages) {
+        return attachmentRepository.findAllByAdvantages(advantages).stream().map((s) -> modelMapper.map(s, AttachmentsDto.class)).collect(Collectors.toList());
+    }
+    @Override
+    public List<AttachmentsDto> findAllByDisadvantages(String disadvantages) {
+        return attachmentRepository.findAllByDisadvantages(disadvantages).stream().map((s) -> modelMapper.map(s, AttachmentsDto.class)).collect(Collectors.toList());
+    }
+    @Override
+    public List<AttachmentsDto> findAllBySettingLimits(String settingLimits) {
+        return attachmentRepository.findAllBySettingLimits(settingLimits).stream().map((s) -> modelMapper.map(s, AttachmentsDto.class)).collect(Collectors.toList());
+    }
 }

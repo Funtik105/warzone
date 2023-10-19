@@ -2,6 +2,7 @@ package com.example.warzone.servises.impl;
 
 import com.example.warzone.controllers.exceptions.LoadoutConflictException;
 import com.example.warzone.controllers.exceptions.LoadoutNotFoundException;
+import com.example.warzone.dtos.AttachmentsDto;
 import com.example.warzone.dtos.LoadoutDto;
 import com.example.warzone.models.Loadout;
 import com.example.warzone.repositories.LoadoutRepository;
@@ -60,4 +61,8 @@ public class LoadoutServiceImpl implements LoadoutService {
             throw new LoadoutNotFoundException(id);
         }
     }
+//    @Override
+//    public List<LoadoutDto> findAllByName(String name) {
+//        return loadoutRepository.findAllByName(name).stream().map((s) -> modelMapper.map(s, LoadoutDto.class)).collect(Collectors.toList());
+//    }
 }
