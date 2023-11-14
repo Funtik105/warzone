@@ -58,4 +58,19 @@ public class NerfsAndBuffsServiceImpl implements NerfsAndBuffsService {
             throw new LoadoutNotFoundException(id);
         }
     }
+
+    @Override
+    public List<NerfsAndBuffsDto> findAllByDate(String date) {
+        return nerfsAndBuffsRepository.findAllByDate(date).stream().map((s)->modelMapper.map(s,NerfsAndBuffsDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<NerfsAndBuffsDto> findAllByNameGun(String nameGun) {
+        return nerfsAndBuffsRepository.findAllByNameGun(nameGun).stream().map((s)->modelMapper.map(s,NerfsAndBuffsDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<NerfsAndBuffsDto> findAllByStatus(boolean status) {
+        return nerfsAndBuffsRepository.findAllByStatus(status).stream().map((s)->modelMapper.map(s,NerfsAndBuffsDto.class)).collect(Collectors.toList());
+    }
 }

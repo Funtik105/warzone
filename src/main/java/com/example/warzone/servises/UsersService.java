@@ -12,5 +12,11 @@ public interface UsersService {
     UsersDto update(UsersDto usersDto);
     void delete(Long id);
     List<UsersDto> findAllByFollowers(int followers);
-
+    List<UsersDto> findAllByName(String name);
+    List<UsersDto> findAllByNickname(String nickname);
+    List<UsersDto> findAllByEmail(String email);
+    List<UsersDto> findAllByDescription(String description);
+    List<UsersDto> findAllByVisibility(String visibility);
+    List<UsersDto> findAllByAvatar(String avatar);
+    List<UsersDto> findAllByPassword(String password);
 }

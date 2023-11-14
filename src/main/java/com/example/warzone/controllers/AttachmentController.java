@@ -46,4 +46,24 @@ public class AttachmentController {
         List<AttachmentsDto> attachments = attachmentService.findAllByWeaponsToOpen(weaponsToOpen);
         return ResponseEntity.ok(attachments);
     }
+    @GetMapping("/byLevels")
+    public ResponseEntity<List<AttachmentsDto>> getAttachmentByLevelsToOpen(@RequestParam short levelsToOpen) {
+        List<AttachmentsDto> attachments = attachmentService.findAllByLevelsToOpen(levelsToOpen);
+        return ResponseEntity.ok(attachments);
+    }
+    @GetMapping("/byAdvantages")
+    public ResponseEntity<List<AttachmentsDto>> getAttachmentByAdvantages(@RequestParam String advantages) {
+        List<AttachmentsDto> attachments = attachmentService.findAllByAdvantages(advantages);
+        return ResponseEntity.ok(attachments);
+    }
+    @GetMapping("/byDisadvantages")
+    public ResponseEntity<List<AttachmentsDto>> getAttachmentByDisadvantages(@RequestParam String disadvantages) {
+        List<AttachmentsDto> attachments = attachmentService.findAllByDisadvantages(disadvantages);
+        return ResponseEntity.ok(attachments);
+    }
+    @GetMapping("/bySettingLimits")
+    public ResponseEntity<List<AttachmentsDto>> getAttachmentBySettingLimits(@RequestParam String settingLimits) {
+        List<AttachmentsDto> attachments = attachmentService.findAllBySettingLimits(settingLimits);
+        return ResponseEntity.ok(attachments);
+    }
 }

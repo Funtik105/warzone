@@ -64,4 +64,39 @@ public class UsersServiceImpl implements UsersService {
     public List<UsersDto> findAllByFollowers(int followers) {
         return usersRepository.findAllByFollowers(followers).stream().map((s) -> modelMapper.map(s, UsersDto.class)).collect(Collectors.toList());
     }
+
+    @Override
+    public List<UsersDto> findAllByName(String name) {
+        return usersRepository.findAllByName(name).stream().map((s) -> modelMapper.map(s, UsersDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UsersDto> findAllByNickname(String nickname) {
+        return usersRepository.findAllByNickname(nickname).stream().map((s) -> modelMapper.map(s, UsersDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UsersDto> findAllByEmail(String email) {
+        return usersRepository.findAllByEmail(email).stream().map((s) -> modelMapper.map(s, UsersDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UsersDto> findAllByDescription(String description) {
+        return usersRepository.findAllByDescription(description).stream().map((s) -> modelMapper.map(s, UsersDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UsersDto> findAllByVisibility(String visibility) {
+        return usersRepository.findAllByVisibility(visibility).stream().map((s) -> modelMapper.map(s, UsersDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UsersDto> findAllByAvatar(String avatar) {
+        return usersRepository.findAllByAvatar(avatar).stream().map((s) -> modelMapper.map(s, UsersDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UsersDto> findAllByPassword(String password) {
+        return usersRepository.findAllByPassword(password).stream().map((s) -> modelMapper.map(s, UsersDto.class)).collect(Collectors.toList());
+    }
 }

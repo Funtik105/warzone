@@ -11,4 +11,7 @@ public interface NerfsAndBuffsService {
     NerfsAndBuffsDto register(NerfsAndBuffsDto nerfsAndBuffsDto);
     NerfsAndBuffsDto update(NerfsAndBuffsDto nerfsAndBuffsDto);
     void delete(Long id);
+    List<NerfsAndBuffsDto> findAllByDate(String date);
+    List<NerfsAndBuffsDto> findAllByNameGun(String nameGun);
+    List<NerfsAndBuffsDto> findAllByStatus(boolean status);
 }

@@ -20,7 +20,10 @@ public class GunServiceImpl implements GunService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public GunServiceImpl(GunRepository gunRepository){this.gunRepository = gunRepository;}
+    public GunServiceImpl(GunRepository gunRepository,ModelMapper modelMapper){
+        this.gunRepository = gunRepository;
+        this.modelMapper = modelMapper;
+    }
     @Override
     public List<GunDto> getAll() {
         return gunRepository.findAll().stream().map((s) -> modelMapper.map(s,GunDto.class)).collect(Collectors.toList());
@@ -57,5 +60,17 @@ public class GunServiceImpl implements GunService {
         } else {
             throw new GunNotFoundException(id);
         }
+    }
+    @Override
+    public List<GunDto> findAllByName(String name) {
+        return gunRepository.findAllByName(name).stream().map((s) -> modelMapper.map(s,GunDto.class)).collect(Collectors.toList());
+    }
+    @Override
+    public List<GunDto> findAllByCategory(String category) {
+        return gunRepository.findAllByCategory(category).stream().map((s) -> modelMapper.map(s,GunDto.class)).collect(Collectors.toList());
+    }
+    @Override
+    public List<GunDto> findAllByPlatform(String platform) {
+        return gunRepository.findAllByPlatform(platform).stream().map((s) -> modelMapper.map(s,GunDto.class)).collect(Collectors.toList());
     }
 }

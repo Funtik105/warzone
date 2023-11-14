@@ -59,4 +59,19 @@ public class PerksServiceImpl implements PerksService {
             throw new PerksNotFoundException(id);
         }
     }
+
+    @Override
+    public List<PerksDto> findAllByName(String name) {
+        return perksRepository.findAllByName(name).stream().map((s)->modelMapper.map(s, PerksDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PerksDto> findAllByType(String type) {
+        return perksRepository.findAllByType(type).stream().map((s)->modelMapper.map(s, PerksDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PerksDto> findAllByDescription(String description) {
+        return perksRepository.findAllByDescription(description).stream().map((s)->modelMapper.map(s, PerksDto.class)).collect(Collectors.toList());
+    }
 }

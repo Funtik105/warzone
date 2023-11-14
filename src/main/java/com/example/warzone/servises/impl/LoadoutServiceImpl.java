@@ -5,6 +5,9 @@ import com.example.warzone.controllers.exceptions.LoadoutNotFoundException;
 import com.example.warzone.dtos.AttachmentsDto;
 import com.example.warzone.dtos.LoadoutDto;
 import com.example.warzone.models.Loadout;
+import com.example.warzone.models.LoadoutGun;
+import com.example.warzone.models.Perks;
+import com.example.warzone.models.Users;
 import com.example.warzone.repositories.LoadoutRepository;
 import com.example.warzone.servises.LoadoutService;
 import org.modelmapper.ModelMapper;
@@ -61,8 +64,28 @@ public class LoadoutServiceImpl implements LoadoutService {
             throw new LoadoutNotFoundException(id);
         }
     }
-//    @Override
-//    public List<LoadoutDto> findAllByName(String name) {
-//        return loadoutRepository.findAllByName(name).stream().map((s) -> modelMapper.map(s, LoadoutDto.class)).collect(Collectors.toList());
-//    }
+    @Override
+    public List<LoadoutDto> findAllByPerk1(String perk_1) {
+        return loadoutRepository.findAllByPerks1(perk_1).stream().map((s)->modelMapper.map(s,LoadoutDto.class)).collect(Collectors.toList());
+    }
+    @Override
+    public List<LoadoutDto> findAllByGun(String gun) {
+        return loadoutRepository.findAllByGuns(gun).stream().map((s)->modelMapper.map(s,LoadoutDto.class)).collect(Collectors.toList());
+    }
+    @Override
+    public List<LoadoutDto> findAllByDescription(String description) {
+        return loadoutRepository.findAllByDescription(description).stream().map((s)->modelMapper.map(s,LoadoutDto.class)).collect(Collectors.toList());
+    }
+    @Override
+    public List<LoadoutDto> findAllByDate(String date) {
+        return loadoutRepository.findAllByDate(date).stream().map((s)->modelMapper.map(s,LoadoutDto.class)).collect(Collectors.toList());
+    }
+    @Override
+    public List<LoadoutDto> findAllByUpdatedAt(String updatedAt) {
+        return loadoutRepository.findAllByUpdatedAt(updatedAt).stream().map((s)->modelMapper.map(s,LoadoutDto.class)).collect(Collectors.toList());
+    }
+    @Override
+    public List<LoadoutDto> findAllByEnabled(String enabled) {
+        return loadoutRepository.findAllByEnabled(enabled).stream().map((s)->modelMapper.map(s,LoadoutDto.class)).collect(Collectors.toList());
+    }
 }
