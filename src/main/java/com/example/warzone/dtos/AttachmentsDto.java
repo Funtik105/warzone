@@ -10,7 +10,8 @@ public class AttachmentsDto {
     private String disadvantages;
     private String settingLimits;
 
-    protected AttachmentsDto() {};
+    protected AttachmentsDto() {
+    }
 
     public AttachmentsDto(Long id, LoadoutGunDto loadoutGun, String name, String weaponsToOpen, short levelsToOpen, String advantages, String disadvantages, String settingLimits) {
         this.id = id;

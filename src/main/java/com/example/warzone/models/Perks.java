@@ -3,7 +3,10 @@ package com.example.warzone.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
 @Entity
+@Table(name = "perks")
 public class Perks extends Base{
     @ManyToOne
     @JoinColumn(name = "loadout_id")
@@ -12,7 +15,8 @@ public class Perks extends Base{
     private String name;
     private String description;
 
-    protected Perks() {};
+    protected Perks() {
+    }
 
     public String getType() {
         return type;

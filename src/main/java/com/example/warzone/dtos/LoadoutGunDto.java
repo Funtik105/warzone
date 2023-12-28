@@ -18,7 +18,8 @@ public class LoadoutGunDto {
     private String attachment_5;
     private String attachment_customization_5;
 
-    protected LoadoutGunDto() {};
+    protected LoadoutGunDto() {
+    }
 
     public LoadoutGunDto(Long id, GunDto gun, LoadoutDto loadout,
                          MetaListDto metaList, String name, String range,

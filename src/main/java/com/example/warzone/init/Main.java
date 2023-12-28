@@ -9,24 +9,28 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Main implements CommandLineRunner {
-    @Autowired
     private ModelMapper modelMapper;
-    @Autowired
     private AttachmentService attachmentService;
-    @Autowired
     private GunService gunService;
-    @Autowired
     private UsersService usersService;
-    @Autowired
     private LoadoutService loadoutService;
-    @Autowired
     private PerksService perksService;
-    @Autowired
     private MetaListService metaListService;
-    @Autowired
     private NerfsAndBuffsService nerfsAndBuffsService;
-    @Autowired
     private LoadoutGunService loadoutGunService;
+
+    @Autowired
+    public Main(ModelMapper modelMapper, AttachmentService attachmentService, GunService gunService, UsersService usersService, LoadoutService loadoutService, PerksService perksService, MetaListService metaListService, NerfsAndBuffsService nerfsAndBuffsService, LoadoutGunService loadoutGunService) {
+        this.modelMapper = modelMapper;
+        this.attachmentService = attachmentService;
+        this.gunService = gunService;
+        this.usersService = usersService;
+        this.loadoutService = loadoutService;
+        this.perksService = perksService;
+        this.metaListService = metaListService;
+        this.nerfsAndBuffsService = nerfsAndBuffsService;
+        this.loadoutGunService = loadoutGunService;
+    }
 
     @Override
     public void run(String... args){

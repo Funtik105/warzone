@@ -3,7 +3,9 @@ package com.example.warzone.models;
 import jakarta.persistence.*;
 
 import java.util.List;
+
 @Entity
+@Table(name = "loadout_guns")
 public class LoadoutGun extends Base {
     @OneToOne
     @JoinColumn(name = "gun_id")
@@ -29,7 +31,8 @@ public class LoadoutGun extends Base {
     private String attachment_5;
     private String attachment_customization_5;
 
-    protected LoadoutGun() {};
+    protected LoadoutGun() {
+    }
 
     public String getName() {
         return name;

@@ -3,10 +3,11 @@ package com.example.warzone.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
-import java.util.List;
 @Entity
-public class NerfsAndBuffs extends Base{
+@Table(name = "nerfs_and_buffs")
+public class NerfsAndBuffs extends Base {
     @ManyToOne
     @JoinColumn(name = "gun_id")
     private Gun gun;
@@ -48,5 +49,6 @@ public class NerfsAndBuffs extends Base{
 
     private String changes;
 
-    protected NerfsAndBuffs() {}
+    protected NerfsAndBuffs() {
+    }
 }

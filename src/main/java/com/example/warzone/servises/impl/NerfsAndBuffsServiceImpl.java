@@ -14,28 +14,33 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 @Service
 public class NerfsAndBuffsServiceImpl implements NerfsAndBuffsService {
-    @Autowired
-    NerfsAndBuffsRepository nerfsAndBuffsRepository;
-    @Autowired
     private ModelMapper modelMapper;
-    public NerfsAndBuffsServiceImpl(NerfsAndBuffsRepository nerfsAndBuffsRepository){this.nerfsAndBuffsRepository = nerfsAndBuffsRepository;}
+    NerfsAndBuffsRepository nerfsAndBuffsRepository;
+
+    @Autowired
+    public NerfsAndBuffsServiceImpl(NerfsAndBuffsRepository nerfsAndBuffsRepository, ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+        this.nerfsAndBuffsRepository = nerfsAndBuffsRepository;
+    }
+
     @Override
     public List<NerfsAndBuffsDto> getAll() {
-        return nerfsAndBuffsRepository.findAll().stream().map((s)->modelMapper.map(s,NerfsAndBuffsDto.class)).collect(Collectors.toList());
+        return nerfsAndBuffsRepository.findAll().stream().map((s) -> modelMapper.map(s, NerfsAndBuffsDto.class)).collect(Collectors.toList());
     }
 
     @Override
     public Optional<NerfsAndBuffsDto> get(Long id) {
-        return Optional.ofNullable(modelMapper.map(nerfsAndBuffsRepository.findById(id),NerfsAndBuffsDto.class));
+        return Optional.ofNullable(modelMapper.map(nerfsAndBuffsRepository.findById(id), NerfsAndBuffsDto.class));
     }
 
     @Override
     public NerfsAndBuffsDto register(NerfsAndBuffsDto nerfsAndBuffsDto) {
-        NerfsAndBuffs nerfsAndBuffs = modelMapper.map(nerfsAndBuffsDto,NerfsAndBuffs.class);
-        if (nerfsAndBuffs.getId() == null || nerfsAndBuffs.getId() == 0 || get(nerfsAndBuffs.getId()).isEmpty()){
-            return modelMapper.map(nerfsAndBuffsRepository.save(nerfsAndBuffs),NerfsAndBuffsDto.class);
+        NerfsAndBuffs nerfsAndBuffs = modelMapper.map(nerfsAndBuffsDto, NerfsAndBuffs.class);
+        if (nerfsAndBuffs.getId() == null || nerfsAndBuffs.getId() == 0 || get(nerfsAndBuffs.getId()).isEmpty()) {
+            return modelMapper.map(nerfsAndBuffsRepository.save(nerfsAndBuffs), NerfsAndBuffsDto.class);
         } else {
             throw new NerfsAndBuffsConflictException("A nerfandbuff with this id already exists");
         }
@@ -44,7 +49,7 @@ public class NerfsAndBuffsServiceImpl implements NerfsAndBuffsService {
     @Override
     public NerfsAndBuffsDto update(NerfsAndBuffsDto nerfsAndBuffsDto) {
         if (nerfsAndBuffsRepository.findById(nerfsAndBuffsDto.getId()).isPresent()) {
-            return modelMapper.map(nerfsAndBuffsRepository.save(modelMapper.map(nerfsAndBuffsDto,NerfsAndBuffs.class)),NerfsAndBuffsDto.class);
+            return modelMapper.map(nerfsAndBuffsRepository.save(modelMapper.map(nerfsAndBuffsDto, NerfsAndBuffs.class)), NerfsAndBuffsDto.class);
         } else {
             throw new NerfsAndBuffsNotFoundException(nerfsAndBuffsDto.getId());
         }
@@ -61,16 +66,16 @@ public class NerfsAndBuffsServiceImpl implements NerfsAndBuffsService {
 
     @Override
     public List<NerfsAndBuffsDto> findAllByDate(String date) {
-        return nerfsAndBuffsRepository.findAllByDate(date).stream().map((s)->modelMapper.map(s,NerfsAndBuffsDto.class)).collect(Collectors.toList());
+        return nerfsAndBuffsRepository.findAllByDate(date).stream().map((s) -> modelMapper.map(s, NerfsAndBuffsDto.class)).collect(Collectors.toList());
     }
 
     @Override
     public List<NerfsAndBuffsDto> findAllByNameGun(String nameGun) {
-        return nerfsAndBuffsRepository.findAllByNameGun(nameGun).stream().map((s)->modelMapper.map(s,NerfsAndBuffsDto.class)).collect(Collectors.toList());
+        return nerfsAndBuffsRepository.findAllByNameGun(nameGun).stream().map((s) -> modelMapper.map(s, NerfsAndBuffsDto.class)).collect(Collectors.toList());
     }
 
     @Override
     public List<NerfsAndBuffsDto> findAllByStatus(boolean status) {
-        return nerfsAndBuffsRepository.findAllByStatus(status).stream().map((s)->modelMapper.map(s,NerfsAndBuffsDto.class)).collect(Collectors.toList());
+        return nerfsAndBuffsRepository.findAllByStatus(status).stream().map((s) -> modelMapper.map(s, NerfsAndBuffsDto.class)).collect(Collectors.toList());
     }
 }

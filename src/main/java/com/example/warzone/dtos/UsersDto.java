@@ -12,9 +12,10 @@ public class UsersDto {
     private String password;
     private int followers;
 
-    protected UsersDto() {};
+    protected UsersDto() {
+    }
 
-    public UsersDto(Long id,String email, String name, String nickname, String description, String visibility, String avatar, String password, int followers) {
+    public UsersDto(Long id, String email, String name, String nickname, String description, String visibility, String avatar, String password, int followers) {
         this.id = id;
         this.email = email;
         this.name = name;

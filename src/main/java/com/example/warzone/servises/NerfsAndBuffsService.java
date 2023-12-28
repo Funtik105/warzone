@@ -7,11 +7,18 @@ import java.util.Optional;
 
 public interface NerfsAndBuffsService {
     List<NerfsAndBuffsDto> getAll();
+
     Optional<NerfsAndBuffsDto> get(Long id);
+
     NerfsAndBuffsDto register(NerfsAndBuffsDto nerfsAndBuffsDto);
+
     NerfsAndBuffsDto update(NerfsAndBuffsDto nerfsAndBuffsDto);
+
     void delete(Long id);
+
     List<NerfsAndBuffsDto> findAllByDate(String date);
+
     List<NerfsAndBuffsDto> findAllByNameGun(String nameGun);
+
     List<NerfsAndBuffsDto> findAllByStatus(boolean status);
 }

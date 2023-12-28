@@ -17,9 +17,10 @@ public class MetaListDto {
     private String attachment_5;
     private String attachment_customization_5;
 
-    protected MetaListDto() {};
+    protected MetaListDto() {
+    }
 
-    public MetaListDto(Long id,String name, String range, String gun1, String category, String attachment_1, String attachment_customization_1, String attachment_2, String attachment_customization_2, String attachment_3, String attachment_customization_3, String attachment_4, String attachment_customization_4, String attachment_5, String attachment_customization_5) {
+    public MetaListDto(Long id, String name, String range, String gun1, String category, String attachment_1, String attachment_customization_1, String attachment_2, String attachment_customization_2, String attachment_3, String attachment_customization_3, String attachment_4, String attachment_customization_4, String attachment_5, String attachment_customization_5) {
         this.id = id;
         this.name = name;
         this.range = range;

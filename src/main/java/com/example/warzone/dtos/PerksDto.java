@@ -7,7 +7,8 @@ public class PerksDto {
     private String name;
     private String description;
 
-    protected PerksDto() {};
+    protected PerksDto() {
+    }
 
     public PerksDto(Long id, LoadoutDto loadout, String type, String name, String description) {
         this.id = id;

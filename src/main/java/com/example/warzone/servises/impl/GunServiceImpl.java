@@ -13,32 +13,33 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 @Service
 public class GunServiceImpl implements GunService {
-    @Autowired
-    GunRepository gunRepository;
-    @Autowired
     private ModelMapper modelMapper;
+    GunRepository gunRepository;
 
-    public GunServiceImpl(GunRepository gunRepository,ModelMapper modelMapper){
-        this.gunRepository = gunRepository;
+    @Autowired
+    public GunServiceImpl(GunRepository gunRepository, ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
+        this.gunRepository = gunRepository;
     }
+
     @Override
     public List<GunDto> getAll() {
-        return gunRepository.findAll().stream().map((s) -> modelMapper.map(s,GunDto.class)).collect(Collectors.toList());
+        return gunRepository.findAll().stream().map((s) -> modelMapper.map(s, GunDto.class)).collect(Collectors.toList());
     }
 
     @Override
     public Optional<GunDto> get(Long id) {
-        return Optional.ofNullable(modelMapper.map(gunRepository.findById(id),GunDto.class));
+        return Optional.ofNullable(modelMapper.map(gunRepository.findById(id), GunDto.class));
     }
 
     @Override
     public GunDto register(GunDto gunDto) {
-        Gun gun = modelMapper.map(gunDto,Gun.class);
-        if(gunDto.getId() == null || gun.getId() == 0 || get(gun.getId()).isEmpty()){
-            return modelMapper.map(gunRepository.save(gun),GunDto.class);
+        Gun gun = modelMapper.map(gunDto, Gun.class);
+        if (gunDto.getId() == null || gun.getId() == 0 || get(gun.getId()).isEmpty()) {
+            return modelMapper.map(gunRepository.save(gun), GunDto.class);
         } else {
             throw new GunConflictException("A gun with this id already exists");
         }
@@ -46,8 +47,8 @@ public class GunServiceImpl implements GunService {
 
     @Override
     public GunDto update(GunDto gunDto) {
-        if(gunRepository.findById(gunDto.getId()).isPresent()){
-            return modelMapper.map(gunRepository.save(modelMapper.map(gunDto,Gun.class)), GunDto.class);
+        if (gunRepository.findById(gunDto.getId()).isPresent()) {
+            return modelMapper.map(gunRepository.save(modelMapper.map(gunDto, Gun.class)), GunDto.class);
         } else {
             throw new GunNotFoundException(gunDto.getId());
         }
@@ -55,22 +56,25 @@ public class GunServiceImpl implements GunService {
 
     @Override
     public void delete(Long id) {
-        if (gunRepository.findById(id).isPresent()){
+        if (gunRepository.findById(id).isPresent()) {
             gunRepository.deleteById(id);
         } else {
             throw new GunNotFoundException(id);
         }
     }
+
     @Override
     public List<GunDto> findAllByName(String name) {
-        return gunRepository.findAllByName(name).stream().map((s) -> modelMapper.map(s,GunDto.class)).collect(Collectors.toList());
+        return gunRepository.findAllByName(name).stream().map((s) -> modelMapper.map(s, GunDto.class)).collect(Collectors.toList());
     }
+
     @Override
     public List<GunDto> findAllByCategory(String category) {
-        return gunRepository.findAllByCategory(category).stream().map((s) -> modelMapper.map(s,GunDto.class)).collect(Collectors.toList());
+        return gunRepository.findAllByCategory(category).stream().map((s) -> modelMapper.map(s, GunDto.class)).collect(Collectors.toList());
     }
+
     @Override
     public List<GunDto> findAllByPlatform(String platform) {
-        return gunRepository.findAllByPlatform(platform).stream().map((s) -> modelMapper.map(s,GunDto.class)).collect(Collectors.toList());
+        return gunRepository.findAllByPlatform(platform).stream().map((s) -> modelMapper.map(s, GunDto.class)).collect(Collectors.toList());
     }
 }

@@ -1,13 +1,15 @@
 package com.example.warzone.models;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 import java.util.List;
+
 @Entity
-public class Gun extends Base{
+@Table(name = "guns")
+public class Gun extends Base {
     @OneToMany(mappedBy = "gun")
     private List<NerfsAndBuffs> nerfsAndBuffs;
     @OneToOne(mappedBy = "gun")
@@ -16,7 +18,8 @@ public class Gun extends Base{
     private String category;
     private String platform;
 
-    protected Gun() {};
+    protected Gun() {
+    }
 
     public String getName() {
         return name;

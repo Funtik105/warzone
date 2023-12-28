@@ -2,10 +2,13 @@ package com.example.warzone.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 import java.util.List;
+
 @Entity
-public class MetaList extends Base{
+@Table(name = "meta_list")
+public class MetaList extends Base {
     @OneToMany(mappedBy = "metaList")
     private List<LoadoutGun> loadoutGuns;
     private String name;
@@ -23,7 +26,8 @@ public class MetaList extends Base{
     private String attachment_5;
     private String attachment_customization_5;
 
-    protected MetaList() {};
+    protected MetaList() {
+    }
 
     public String getName() {
         return name;

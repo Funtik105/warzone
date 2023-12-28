@@ -3,8 +3,11 @@ package com.example.warzone.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
 @Entity
-public class Attachments extends Base{
+@Table(name = "attachments")
+public class Attachments extends Base {
     @ManyToOne
     @JoinColumn(name = "loadoutGun_id")
     private LoadoutGun loadoutGun;
@@ -15,7 +18,8 @@ public class Attachments extends Base{
     private String disadvantages;
     private String settingLimits;
 
-    protected Attachments() {};
+    protected Attachments() {
+    }
 
     public String getName() {
         return name;

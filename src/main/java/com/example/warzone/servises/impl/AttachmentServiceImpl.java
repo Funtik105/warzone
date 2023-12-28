@@ -16,34 +16,39 @@ import java.util.stream.Collectors;
 
 @Service
 public class AttachmentServiceImpl implements AttachmentService {
-    @Autowired
-    AttachmentRepository attachmentRepository;
-    @Autowired
     private ModelMapper modelMapper;
+    AttachmentRepository attachmentRepository;
 
-    public AttachmentServiceImpl(AttachmentRepository attachmentRepository){ this.attachmentRepository = attachmentRepository; }
-    @Override
-    public List<AttachmentsDto> getAll(){
-        return attachmentRepository.findAll().stream().map((s)->modelMapper.map(s,AttachmentsDto.class)).collect(Collectors.toList());
+    @Autowired
+    public AttachmentServiceImpl(AttachmentRepository attachmentRepository, ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+        this.attachmentRepository = attachmentRepository;
     }
+
     @Override
-    public Optional<AttachmentsDto> get(Long id){
-        return Optional.ofNullable(modelMapper.map(attachmentRepository.findById(id),AttachmentsDto.class));
+    public List<AttachmentsDto> getAll() {
+        return attachmentRepository.findAll().stream().map((s) -> modelMapper.map(s, AttachmentsDto.class)).collect(Collectors.toList());
     }
+
     @Override
-    public AttachmentsDto register(AttachmentsDto attachmentsDto){
-        Attachments attachments = modelMapper.map(attachmentsDto,Attachments.class);
-        if(attachments.getId() == null || attachments.getId() == 0 || get(attachments.getId()).isEmpty()){
-            return modelMapper.map(attachmentRepository.save(attachments),AttachmentsDto.class);
-        }
-        else {
+    public Optional<AttachmentsDto> get(Long id) {
+        return Optional.ofNullable(modelMapper.map(attachmentRepository.findById(id), AttachmentsDto.class));
+    }
+
+    @Override
+    public AttachmentsDto register(AttachmentsDto attachmentsDto) {
+        Attachments attachments = modelMapper.map(attachmentsDto, Attachments.class);
+        if (attachments.getId() == null || attachments.getId() == 0 || get(attachments.getId()).isEmpty()) {
+            return modelMapper.map(attachmentRepository.save(attachments), AttachmentsDto.class);
+        } else {
             throw new AttachmentConflictException("A attachment with this id already exists");
         }
     }
+
     @Override
-    public AttachmentsDto update(AttachmentsDto attachmentsDto){
+    public AttachmentsDto update(AttachmentsDto attachmentsDto) {
         if (attachmentRepository.findById(attachmentsDto.getId()).isPresent()) {
-            return modelMapper.map(attachmentRepository.save(modelMapper.map(attachmentsDto, Attachments.class)),AttachmentsDto.class);
+            return modelMapper.map(attachmentRepository.save(modelMapper.map(attachmentsDto, Attachments.class)), AttachmentsDto.class);
         } else {
             throw new AttachmentNotFoundException(attachmentsDto.getId());
         }
@@ -57,26 +62,32 @@ public class AttachmentServiceImpl implements AttachmentService {
             throw new AttachmentNotFoundException(id);
         }
     }
+
     @Override
     public List<AttachmentsDto> findAllByName(String name) {
         return attachmentRepository.findAllByName(name).stream().map((s) -> modelMapper.map(s, AttachmentsDto.class)).collect(Collectors.toList());
     }
+
     @Override
     public List<AttachmentsDto> findAllByWeaponsToOpen(String weaponsToOpen) {
         return attachmentRepository.findAllByWeaponsToOpen(weaponsToOpen).stream().map((s) -> modelMapper.map(s, AttachmentsDto.class)).collect(Collectors.toList());
     }
+
     @Override
     public List<AttachmentsDto> findAllByLevelsToOpen(short levelsToOpen) {
         return attachmentRepository.findAllByLevelsToOpen(levelsToOpen).stream().map((s) -> modelMapper.map(s, AttachmentsDto.class)).collect(Collectors.toList());
     }
+
     @Override
     public List<AttachmentsDto> findAllByAdvantages(String advantages) {
         return attachmentRepository.findAllByAdvantages(advantages).stream().map((s) -> modelMapper.map(s, AttachmentsDto.class)).collect(Collectors.toList());
     }
+
     @Override
     public List<AttachmentsDto> findAllByDisadvantages(String disadvantages) {
         return attachmentRepository.findAllByDisadvantages(disadvantages).stream().map((s) -> modelMapper.map(s, AttachmentsDto.class)).collect(Collectors.toList());
     }
+
     @Override
     public List<AttachmentsDto> findAllBySettingLimits(String settingLimits) {
         return attachmentRepository.findAllBySettingLimits(settingLimits).stream().map((s) -> modelMapper.map(s, AttachmentsDto.class)).collect(Collectors.toList());

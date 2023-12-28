@@ -2,9 +2,12 @@ package com.example.warzone.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 import java.util.List;
+
 @Entity
+@Table(name = "users")
 public class Users extends Base{
     @OneToMany(mappedBy = "user")
     private List<Loadout> loadOuts;
@@ -17,7 +20,8 @@ public class Users extends Base{
     private String password;
     private int followers;
 
-    protected Users() {};
+    protected Users() {
+    }
 
     public String getEmail() {
         return email;

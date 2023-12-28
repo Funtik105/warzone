@@ -1,13 +1,12 @@
 package com.example.warzone.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.List;
+
 @Entity
-public class Loadout extends Base{
+@Table
+public class Loadout extends Base {
     @OneToMany(mappedBy = "loadout")
     private List<LoadoutGun> loadoutGuns;
     @OneToMany(mappedBy = "loadout")
@@ -22,7 +21,8 @@ public class Loadout extends Base{
     private String updatedAt;
     private String enabled;
 
-    protected Loadout() {};
+    protected Loadout() {
+    }
 
     public String getPerks1() {
         return perks1;

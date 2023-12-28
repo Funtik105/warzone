@@ -6,9 +6,10 @@ public class GunDto {
     private String category;
     private String platform;
 
-    protected GunDto() {};
+    protected GunDto() {
+    }
 
-    public GunDto(Long id,String name, String category, String platform) {
+    public GunDto(Long id, String name, String category, String platform) {
         this.id = id;
         this.name = name;
         this.category = category;
