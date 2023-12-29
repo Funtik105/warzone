@@ -1,6 +1,7 @@
 package com.example.warzone.controllers;
 
 import com.example.warzone.dtos.gunservice.FindGunsResponse;
+import com.example.warzone.dtos.gunservice.GunDto;
 import com.example.warzone.models.Gun;
 import com.example.warzone.servises.GunService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,7 +28,7 @@ public class GunController {
     @Operation(summary = "Получить все")
     @GetMapping("/all")
     public ResponseEntity<FindGunsResponse> findAllGuns() {
-        List<Gun> guns = gunService.getAll(); // Получение списка оружия
+        List<GunDto> guns = gunService.getAll(); // Получение списка оружия
         FindGunsResponse response = new FindGunsResponse();
         response.setTotalCount(guns.size());
         response.setBody(guns);
@@ -38,7 +39,7 @@ public class GunController {
 
     @Operation(summary = "Получить по id")
     @GetMapping("/findById")
-    public ResponseEntity<Gun> get(@RequestParam Long id) {
+    public ResponseEntity<GunDto> get(@RequestParam Long id) {
 //        List<Gun> guns = gunService.get(id);
 ////                .map(ResponseEntity::ok)
 ////                .orElseGet(() -> ResponseEntity.notFound().build());
@@ -56,7 +57,7 @@ public class GunController {
 
     @Operation(summary = "Получить по имени")
     @GetMapping("/findByName")
-    public ResponseEntity<Gun> getGunByName(@RequestParam String name) {
+    public ResponseEntity<GunDto> getGunByName(@RequestParam String name) {
         return gunService.findByName(name)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -64,7 +65,7 @@ public class GunController {
 
     @Operation(summary = "Получить по категории")
     @GetMapping("/findByCategory")
-    public ResponseEntity<Gun> getGunByCategory(@RequestParam String category) {
+    public ResponseEntity<GunDto> getGunByCategory(@RequestParam String category) {
         return gunService.findByCategory(category)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());

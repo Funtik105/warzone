@@ -1,6 +1,7 @@
 package com.example.warzone.servises.impl;
 
 import com.example.warzone.controllers.exceptions.GunNotFoundException;
+import com.example.warzone.dtos.gunservice.GunDto;
 import com.example.warzone.models.Gun;
 import com.example.warzone.repositories.GunRepository;
 import com.example.warzone.servises.GunService;
@@ -24,11 +25,11 @@ public class GunServiceImpl implements GunService{
     }
 
     @Override
-    public List<Gun> getAll() {
+    public List<GunDto> getAll() {
         List<Gun> gunEntities = gunRepository.findAll();
-        List<Gun> guns = new ArrayList<>();
+        List<GunDto> guns = new ArrayList<>();
         for (Gun entity : gunEntities) {
-            Gun gun = new Gun();
+            GunDto gun = new GunDto();
             gun.setId(entity.getId());
             gun.setName(entity.getName());
             gun.setCategory(entity.getCategory());
@@ -38,25 +39,11 @@ public class GunServiceImpl implements GunService{
         return guns;
     }
 
-//    @Override
-//    public List<Gun> get(Long id) {
-//        List<Gun> gunEntities = gunRepository.findById(id);
-//        List<Gun> guns = new ArrayList<>();
-//        for (Gun entity : gunEntities) {
-//            Gun gun = new Gun();
-//            gun.setId(entity.getId());
-//            gun.setName(entity.getName());
-//            gun.setCategory(entity.getCategory());
-//            gun.setGameRepresents(entity.getGameRepresents());
-//            guns.add(gun);
-//        }
-//        return guns;
-//    }
     @Override
-    public Optional<Gun> get(Long id) {
+    public Optional<GunDto> get(Long id) {
         return gunRepository.findById(id)
                 .map(entity -> {
-                    Gun gun = new Gun();
+                    GunDto gun = new GunDto();
                     gun.setId(entity.getId());
                     gun.setName(entity.getName());
                     gun.setCategory(entity.getCategory());
@@ -104,10 +91,10 @@ public class GunServiceImpl implements GunService{
     }
 
     @Override
-    public Optional<Gun> findByName(String name) {
+    public Optional<GunDto> findByName(String name) {
         return gunRepository.findByName(name)
                 .map(entity -> {
-                    Gun gun = new Gun();
+                    GunDto gun = new GunDto();
                     gun.setId(entity.getId());
                     gun.setName(entity.getName());
                     gun.setCategory(entity.getCategory());
@@ -117,10 +104,10 @@ public class GunServiceImpl implements GunService{
     }
 
     @Override
-    public Optional<Gun> findByCategory(String category) {
+    public Optional<GunDto> findByCategory(String category) {
         return gunRepository.findByCategory(category)
                 .map(entity -> {
-                    Gun gun = new Gun();
+                    GunDto gun = new GunDto();
                     gun.setId(entity.getId());
                     gun.setName(entity.getName());
                     gun.setCategory(entity.getCategory());
