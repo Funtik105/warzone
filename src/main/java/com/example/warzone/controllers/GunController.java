@@ -40,16 +40,6 @@ public class GunController {
     @Operation(summary = "Получить по id")
     @GetMapping("/findById")
     public ResponseEntity<GunDto> get(@RequestParam Long id) {
-//        List<Gun> guns = gunService.get(id);
-////                .map(ResponseEntity::ok)
-////                .orElseGet(() -> ResponseEntity.notFound().build());
-//        FindGunsResponse response = new FindGunsResponse();
-//        response.setTotalCount(guns.size());
-//        response.setBody(guns);
-//        response.setErrors(new ArrayList<>());
-//
-//        return ResponseEntity.ok(response);
-
         return gunService.get(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -63,12 +53,16 @@ public class GunController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @Operation(summary = "Получить по категории")
+    @Operation(summary = "Получить список по категории")
     @GetMapping("/findByCategory")
-    public ResponseEntity<GunDto> getGunByCategory(@RequestParam String category) {
-        return gunService.findByCategory(category)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<FindGunsResponse> getGunByCategory(@RequestParam String category) {
+        List<GunDto> guns = gunService.findByCategory(category);
+        FindGunsResponse response = new FindGunsResponse();
+        response.setTotalCount(guns.size());
+        response.setBody(guns);
+        response.setErrors(new ArrayList<>());
+
+        return ResponseEntity.ok(response);
     }
 
     @Operation(summary = "Добавить новый")

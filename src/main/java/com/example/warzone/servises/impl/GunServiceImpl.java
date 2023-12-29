@@ -104,15 +104,17 @@ public class GunServiceImpl implements GunService{
     }
 
     @Override
-    public Optional<GunDto> findByCategory(String category) {
-        return gunRepository.findByCategory(category)
-                .map(entity -> {
-                    GunDto gun = new GunDto();
-                    gun.setId(entity.getId());
-                    gun.setName(entity.getName());
-                    gun.setCategory(entity.getCategory());
-                    gun.setGameRepresents(entity.getGameRepresents());
-                    return gun;
-                });
+    public List<GunDto> findByCategory(String category) {
+        List<Gun> gunEntities = gunRepository.findByCategory(category);
+        List<GunDto> guns = new ArrayList<>();
+        for (Gun entity : gunEntities) {
+            GunDto gun = new GunDto();
+            gun.setId(entity.getId());
+            gun.setName(entity.getName());
+            gun.setCategory(entity.getCategory());
+            gun.setGameRepresents(entity.getGameRepresents());
+            guns.add(gun);
+        }
+        return guns;
     }
 }

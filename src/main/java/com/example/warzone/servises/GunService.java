@@ -17,7 +17,7 @@ public interface GunService {
 
     Optional<GunDto> findByName(String name);
 
-    Optional<GunDto> findByCategory(String category);
+    List<GunDto> findByCategory(String category);
 
     void delete(Long id);
 }
