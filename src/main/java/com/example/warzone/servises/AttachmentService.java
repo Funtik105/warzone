@@ -24,7 +24,5 @@ public interface AttachmentService {
 
     List<AttachmentsDto> findAllByDisadvantages(String disadvantages);
 
-    List<AttachmentsDto> findAllBySettingLimits(String settingLimits);
-
     void delete(Long id);
 }

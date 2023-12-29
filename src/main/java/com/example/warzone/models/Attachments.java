@@ -3,10 +3,8 @@ package com.example.warzone.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "attachments")
 public class Attachments extends Base {
     @ManyToOne
     @JoinColumn(name = "loadoutGun_id")
@@ -16,9 +14,16 @@ public class Attachments extends Base {
     private short levelsToOpen;
     private String advantages;
     private String disadvantages;
-    private String settingLimits;
 
     protected Attachments() {
+    }
+
+    public LoadoutGun getLoadoutGun() {
+        return loadoutGun;
+    }
+
+    public void setLoadoutGun(LoadoutGun loadoutGun) {
+        this.loadoutGun = loadoutGun;
     }
 
     public String getName() {
@@ -59,13 +64,5 @@ public class Attachments extends Base {
 
     public void setDisadvantages(String disadvantages) {
         this.disadvantages = disadvantages;
-    }
-
-    public String getSettingLimits() {
-        return settingLimits;
-    }
-
-    public void setSettingLimits(String settingLimits) {
-        this.settingLimits = settingLimits;
     }
 }

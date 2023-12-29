@@ -107,29 +107,4 @@ public class MetaListServiceImpl implements MetaListService {
     public List<MetaListDto> findAllByAttachment_5(String attachment_5) {
         return metaListRepository.findAllByAttachment_5(attachment_5).stream().map((s)-> modelMapper.map(s,MetaListDto.class)).collect(Collectors.toList());
     }
-
-    @Override
-    public List<MetaListDto> findAllByAttachment_customization_1(String attachment_customization_1) {
-        return metaListRepository.findAllByAttachment_customization_1(attachment_customization_1).stream().map((s)-> modelMapper.map(s,MetaListDto.class)).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<MetaListDto> findAllByAttachment_customization_2(String attachment_customization_2) {
-        return metaListRepository.findAllByAttachment_customization_2(attachment_customization_2).stream().map((s)-> modelMapper.map(s,MetaListDto.class)).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<MetaListDto> findAllByAttachment_customization_3(String attachment_customization_3) {
-        return metaListRepository.findAllByAttachment_customization_3(attachment_customization_3).stream().map((s)-> modelMapper.map(s,MetaListDto.class)).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<MetaListDto> findAllByAttachment_customization_4(String attachment_customization_4) {
-        return metaListRepository.findAllByAttachment_customization_4(attachment_customization_4).stream().map((s)-> modelMapper.map(s,MetaListDto.class)).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<MetaListDto> findAllByAttachment_customization_5(String attachment_customization_5) {
-        return metaListRepository.findAllByAttachment_customization_5(attachment_customization_5).stream().map((s)-> modelMapper.map(s,MetaListDto.class)).collect(Collectors.toList());
-    }
 }

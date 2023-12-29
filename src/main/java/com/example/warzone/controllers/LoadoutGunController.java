@@ -100,39 +100,4 @@ public class LoadoutGunController{
         List<LoadoutGunDto> loadoutGuns = loadoutGunService.findAllByAttachment_5(attachment_5);
         return ResponseEntity.ok(loadoutGuns);
     }
-
-    @Operation(summary = "Получить по attachment_customization_1")
-    @GetMapping("/byAttachment_customization_1")
-    public ResponseEntity<List<LoadoutGunDto>> getLoadoutGunByAttachment_customization_1(@RequestParam String attachment_customization_1) {
-        List<LoadoutGunDto> loadoutGuns = loadoutGunService.findAllByAttachment_customization_1(attachment_customization_1);
-        return ResponseEntity.ok(loadoutGuns);
-    }
-
-    @Operation(summary = "Получить по attachment_customization_2")
-    @GetMapping("/byAttachment_customization_2")
-    public ResponseEntity<List<LoadoutGunDto>> getLoadoutGunByAttachment_customization_2(@RequestParam String attachment_customization_2) {
-        List<LoadoutGunDto> loadoutGuns = loadoutGunService.findAllByAttachment_customization_2(attachment_customization_2);
-        return ResponseEntity.ok(loadoutGuns);
-    }
-
-    @Operation(summary = "Получить по attachment_customization_3")
-    @GetMapping("/byAttachment_customization_3")
-    public ResponseEntity<List<LoadoutGunDto>> getLoadoutGunByAttachment_customization_3(@RequestParam String attachment_customization_3) {
-        List<LoadoutGunDto> loadoutGuns = loadoutGunService.findAllByAttachment_customization_3(attachment_customization_3);
-        return ResponseEntity.ok(loadoutGuns);
-    }
-
-    @Operation(summary = "Получить по attachment_customization_4")
-    @GetMapping("/byAttachment_customization_4")
-    public ResponseEntity<List<LoadoutGunDto>> getLoadoutGunByAttachment_customization_4(@RequestParam String attachment_customization_4) {
-        List<LoadoutGunDto> loadoutGuns = loadoutGunService.findAllByAttachment_customization_4(attachment_customization_4);
-        return ResponseEntity.ok(loadoutGuns);
-    }
-
-    @Operation(summary = "Получить по attachment_customization_5")
-    @GetMapping("/byAttachment_customization_5")
-    public ResponseEntity<List<LoadoutGunDto>> getLoadoutGunByAttachment_customization_5(@RequestParam String attachment_customization_5) {
-        List<LoadoutGunDto> loadoutGuns = loadoutGunService.findAllByAttachment_customization_5(attachment_customization_5);
-        return ResponseEntity.ok(loadoutGuns);
-    }
 }

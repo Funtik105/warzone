@@ -69,8 +69,8 @@ public class PerksServiceImpl implements PerksService{
     }
 
     @Override
-    public List<PerksDto> findAllByType(String type) {
-        return perksRepository.findAllByType(type).stream().map((s) -> modelMapper.map(s, PerksDto.class)).collect(Collectors.toList());
+    public List<PerksDto> findAllByType(String slot) {
+        return perksRepository.findAllBySlot(slot).stream().map((s) -> modelMapper.map(s, PerksDto.class)).collect(Collectors.toList());
     }
 
     @Override

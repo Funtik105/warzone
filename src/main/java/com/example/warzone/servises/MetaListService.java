@@ -33,14 +33,4 @@ public interface MetaListService {
     List<MetaListDto> findAllByAttachment_4(String attachment_4);
 
     List<MetaListDto> findAllByAttachment_5(String attachment_5);
-
-    List<MetaListDto> findAllByAttachment_customization_1(String attachment_customization_1);
-
-    List<MetaListDto> findAllByAttachment_customization_2(String attachment_customization_2);
-
-    List<MetaListDto> findAllByAttachment_customization_3(String attachment_customization_3);
-
-    List<MetaListDto> findAllByAttachment_customization_4(String attachment_customization_4);
-
-    List<MetaListDto> findAllByAttachment_customization_5(String attachment_customization_5);
 }

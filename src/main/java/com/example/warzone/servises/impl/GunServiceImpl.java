@@ -72,9 +72,4 @@ public class GunServiceImpl implements GunService {
     public List<GunDto> findAllByCategory(String category) {
         return gunRepository.findAllByCategory(category).stream().map((s) -> modelMapper.map(s, GunDto.class)).collect(Collectors.toList());
     }
-
-    @Override
-    public List<GunDto> findAllByPlatform(String platform) {
-        return gunRepository.findAllByPlatform(platform).stream().map((s) -> modelMapper.map(s, GunDto.class)).collect(Collectors.toList());
-    }
 }

@@ -108,41 +108,6 @@ public class MetaListController{
         return ResponseEntity.ok(metaList);
     }
 
-    @Operation(summary = "Получить по attachment_customization_1")
-    @GetMapping("/byAttachment_customization_1")
-    ResponseEntity<List<MetaListDto>> getMetaListByAttachment_customization_1(@RequestParam String attachment_customization_1) {
-        List<MetaListDto> metaList = metaListService.findAllByAttachment_customization_1(attachment_customization_1);
-        return ResponseEntity.ok(metaList);
-    }
-
-    @Operation(summary = "Получить по attachment_customization_2")
-    @GetMapping("/byAttachment_customization_2")
-    ResponseEntity<List<MetaListDto>> getMetaListByAttachment_customization_2(@RequestParam String attachment_customization_2) {
-        List<MetaListDto> metaList = metaListService.findAllByAttachment_customization_2(attachment_customization_2);
-        return ResponseEntity.ok(metaList);
-    }
-
-    @Operation(summary = "Получить по attachment_customization_3")
-    @GetMapping("/byAttachment_customization_3")
-    ResponseEntity<List<MetaListDto>> getMetaListByAttachment_customization_3(@RequestParam String attachment_customization_3) {
-        List<MetaListDto> metaList = metaListService.findAllByAttachment_customization_3(attachment_customization_3);
-        return ResponseEntity.ok(metaList);
-    }
-
-    @Operation(summary = "Получить по attachment_customization_4")
-    @GetMapping("/byAttachment_customization_4")
-    ResponseEntity<List<MetaListDto>> getMetaListByAttachment_customization_4(@RequestParam String attachment_customization_4) {
-        List<MetaListDto> metaList = metaListService.findAllByAttachment_customization_4(attachment_customization_4);
-        return ResponseEntity.ok(metaList);
-    }
-
-    @Operation(summary = "Получить по attachment_customization_5")
-    @GetMapping("/byAttachment_customization_5")
-    ResponseEntity<List<MetaListDto>> getMetaListByAttachment_customization_5(@RequestParam String attachment_customization_5) {
-        List<MetaListDto> metaList = metaListService.findAllByAttachment_customization_5(attachment_customization_5);
-        return ResponseEntity.ok(metaList);
-    }
-
     @Operation(summary = "Получить по gun1")
     @GetMapping("/byGun1")
     ResponseEntity<List<MetaListDto>> getMetaListByGun1(@RequestParam String gun1) {

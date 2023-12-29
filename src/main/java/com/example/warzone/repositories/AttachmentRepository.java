@@ -16,6 +16,4 @@ public interface AttachmentRepository extends JpaRepository<Attachments, Long> {
 
     List<Attachments> findAllByDisadvantages(String disadvantages);
 
-    List<Attachments> findAllBySettingLimits(String settingLimits);
-
 }

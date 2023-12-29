@@ -98,29 +98,4 @@ public class LoadoutGunServiceImpl implements LoadoutGunService {
     public List<LoadoutGunDto> findAllByAttachment_5(String attachment_5) {
         return loadoutGunRepository.findAllByAttachment_5(attachment_5).stream().map((s) -> modelMapper.map(s, LoadoutGunDto.class)).collect(Collectors.toList());
     }
-
-    @Override
-    public List<LoadoutGunDto> findAllByAttachment_customization_1(String attachment_customization_1) {
-        return loadoutGunRepository.findAllByAttachment_customization_1(attachment_customization_1).stream().map((s) -> modelMapper.map(s, LoadoutGunDto.class)).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<LoadoutGunDto> findAllByAttachment_customization_2(String attachment_customization_2) {
-        return loadoutGunRepository.findAllByAttachment_customization_2(attachment_customization_2).stream().map((s) -> modelMapper.map(s, LoadoutGunDto.class)).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<LoadoutGunDto> findAllByAttachment_customization_3(String attachment_customization_3) {
-        return loadoutGunRepository.findAllByAttachment_customization_3(attachment_customization_3).stream().map((s) -> modelMapper.map(s, LoadoutGunDto.class)).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<LoadoutGunDto> findAllByAttachment_customization_4(String attachment_customization_4) {
-        return loadoutGunRepository.findAllByAttachment_customization_4(attachment_customization_4).stream().map((s) -> modelMapper.map(s, LoadoutGunDto.class)).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<LoadoutGunDto> findAllByAttachment_customization_5(String attachment_customization_5) {
-        return loadoutGunRepository.findAllByAttachment_customization_5(attachment_customization_5).stream().map((s) -> modelMapper.map(s, LoadoutGunDto.class)).collect(Collectors.toList());
-    }
 }

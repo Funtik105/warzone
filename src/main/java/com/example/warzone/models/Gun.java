@@ -8,7 +8,6 @@ import jakarta.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "guns")
 public class Gun extends Base {
     @OneToMany(mappedBy = "gun")
     private List<NerfsAndBuffs> nerfsAndBuffs;
@@ -16,7 +15,7 @@ public class Gun extends Base {
     private LoadoutGun loadoutGun;
     private String name;
     private String category;
-    private String platform;
+    private String gameRepresents;
 
     protected Gun() {
     }
@@ -37,11 +36,27 @@ public class Gun extends Base {
         this.category = category;
     }
 
-    public String getPlatform() {
-        return platform;
+    public List<NerfsAndBuffs> getNerfsAndBuffs() {
+        return nerfsAndBuffs;
     }
 
-    public void setPlatform(String platform) {
-        this.platform = platform;
+    public void setNerfsAndBuffs(List<NerfsAndBuffs> nerfsAndBuffs) {
+        this.nerfsAndBuffs = nerfsAndBuffs;
+    }
+
+    public LoadoutGun getLoadoutGun() {
+        return loadoutGun;
+    }
+
+    public void setLoadoutGun(LoadoutGun loadoutGun) {
+        this.loadoutGun = loadoutGun;
+    }
+
+    public String getGameRepresents() {
+        return gameRepresents;
+    }
+
+    public void setGameRepresents(String gameRepresents) {
+        this.gameRepresents = gameRepresents;
     }
 }

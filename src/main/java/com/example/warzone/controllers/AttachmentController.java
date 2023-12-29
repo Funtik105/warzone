@@ -86,11 +86,4 @@ public class AttachmentController{
         List<AttachmentsDto> attachments = attachmentService.findAllByDisadvantages(disadvantages);
         return ResponseEntity.ok(attachments);
     }
-
-    @Operation(summary = "Получить все по ограничениям")
-    @GetMapping("/bySettingLimits")
-    public ResponseEntity<List<AttachmentsDto>> getAttachmentBySettingLimits(@RequestParam String settingLimits) {
-        List<AttachmentsDto> attachments = attachmentService.findAllBySettingLimits(settingLimits);
-        return ResponseEntity.ok(attachments);
-    }
 }

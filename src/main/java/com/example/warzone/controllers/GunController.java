@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "Gun", description = "API для вложений")
+@Tag(name = "Gun", description = "API для получения всех оружий игры")
 @RestController
-@RequestMapping("/guns")
-public class GunController{
+@RequestMapping("/gunservice")
+public class GunController {
     private GunService gunService;
 
     @Autowired
@@ -23,25 +23,25 @@ public class GunController{
     }
 
     @Operation(summary = "Получить все")
-    @GetMapping()
-    List<GunDto> all() {
+    @GetMapping("/all")
+    public List<GunDto> getGuns() {
         return gunService.getAll();
     }
 
     @Operation(summary = "Получить по id")
-    @GetMapping("{id}")
+    @GetMapping("/findById")
     GunDto get(@PathVariable Long id) {
         return gunService.get(id).orElseThrow(() -> new GunNotFoundException(id));
     }
 
-    @Operation(summary = "Создать")
-    @PostMapping()
+    @Operation(summary = "Добавить новый")
+    @PostMapping("/new")
     GunDto create(@RequestBody GunDto gunDto) {
         return gunService.register(gunDto);
     }
 
     @Operation(summary = "Обновить")
-    @PutMapping()
+    @PutMapping("/update")
     GunDto update(@RequestBody GunDto gunDto) {
         return gunService.update(gunDto);
     }
@@ -63,13 +63,6 @@ public class GunController{
     @GetMapping("/byCategory")
     public ResponseEntity<List<GunDto>> getGunByCategory(@RequestParam String category) {
         List<GunDto> guns = gunService.findAllByCategory(category);
-        return ResponseEntity.ok(guns);
-    }
-
-    @Operation(summary = "Получить по платформе")
-    @GetMapping("/byPlatform")
-    public ResponseEntity<List<GunDto>> getGunByPlatform(@RequestParam String platform) {
-        List<GunDto> guns = gunService.findAllByPlatform(platform);
         return ResponseEntity.ok(guns);
     }
 }

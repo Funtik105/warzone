@@ -3,17 +3,17 @@ package com.example.warzone.dtos;
 public class PerksDto {
     private Long id;
     private LoadoutDto loadout;
-    private String type;
     private String name;
     private String description;
+    private String slot;
 
     protected PerksDto() {
     }
 
-    public PerksDto(Long id, LoadoutDto loadout, String type, String name, String description) {
+    public PerksDto(Long id, LoadoutDto loadout, String slot, String name, String description) {
         this.id = id;
         this.loadout = loadout;
-        this.type = type;
+        this.slot = slot;
         this.name = name;
         this.description = description;
     }
@@ -34,12 +34,12 @@ public class PerksDto {
         this.loadout = loadout;
     }
 
-    public String getType() {
-        return type;
+    public String getSlot() {
+        return slot;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setSlot(String slot) {
+        this.slot = slot;
     }
 
     public String getName() {
@@ -63,7 +63,7 @@ public class PerksDto {
         return "PerksDto{" +
                 "id=" + id +
                 ", loadout=" + loadout +
-                ", type='" + type + '\'' +
+                ", type='" + slot + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 '}';

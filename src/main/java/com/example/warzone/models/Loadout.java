@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table
 public class Loadout extends Base {
     @OneToMany(mappedBy = "loadout")
     private List<LoadoutGun> loadoutGuns;

@@ -87,9 +87,4 @@ public class AttachmentServiceImpl implements AttachmentService {
     public List<AttachmentsDto> findAllByDisadvantages(String disadvantages) {
         return attachmentRepository.findAllByDisadvantages(disadvantages).stream().map((s) -> modelMapper.map(s, AttachmentsDto.class)).collect(Collectors.toList());
     }
-
-    @Override
-    public List<AttachmentsDto> findAllBySettingLimits(String settingLimits) {
-        return attachmentRepository.findAllBySettingLimits(settingLimits).stream().map((s) -> modelMapper.map(s, AttachmentsDto.class)).collect(Collectors.toList());
-    }
 }

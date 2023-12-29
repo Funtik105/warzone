@@ -26,16 +26,6 @@ public interface LoadoutGunService {
 
     List<LoadoutGunDto> findAllByAttachment_5(String attachment_5);
 
-    List<LoadoutGunDto> findAllByAttachment_customization_1(String attachment_customization_1);
-
-    List<LoadoutGunDto> findAllByAttachment_customization_2(String attachment_customization_2);
-
-    List<LoadoutGunDto> findAllByAttachment_customization_3(String attachment_customization_3);
-
-    List<LoadoutGunDto> findAllByAttachment_customization_4(String attachment_customization_4);
-
-    List<LoadoutGunDto> findAllByAttachment_customization_5(String attachment_customization_5);
-
     List<LoadoutGunDto> findAllByRange(String range);
 
     List<LoadoutGunDto> findAllByName(String name);
