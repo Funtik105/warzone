@@ -17,7 +17,13 @@ public class Gun extends Base {
     private String category;
     private String gameRepresents;
 
-    protected Gun() {
+    public Gun() {
+    }
+
+    public Gun(String name, String category, String gameRepresents) {
+        this.name = name;
+        this.category = category;
+        this.gameRepresents = gameRepresents;
     }
 
     public String getName() {

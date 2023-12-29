@@ -1,8 +1,6 @@
 package com.example.warzone.servises.impl;
 
-import com.example.warzone.controllers.exceptions.GunConflictException;
 import com.example.warzone.controllers.exceptions.GunNotFoundException;
-import com.example.warzone.dtos.GunDto;
 import com.example.warzone.models.Gun;
 import com.example.warzone.repositories.GunRepository;
 import com.example.warzone.servises.GunService;
@@ -10,12 +8,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
-public class GunServiceImpl implements GunService {
+public class GunServiceImpl implements GunService{
     private ModelMapper modelMapper;
     GunRepository gunRepository;
 
@@ -26,32 +24,74 @@ public class GunServiceImpl implements GunService {
     }
 
     @Override
-    public List<GunDto> getAll() {
-        return gunRepository.findAll().stream().map((s) -> modelMapper.map(s, GunDto.class)).collect(Collectors.toList());
-    }
-
-    @Override
-    public Optional<GunDto> get(Long id) {
-        return Optional.ofNullable(modelMapper.map(gunRepository.findById(id), GunDto.class));
-    }
-
-    @Override
-    public GunDto register(GunDto gunDto) {
-        Gun gun = modelMapper.map(gunDto, Gun.class);
-        if (gunDto.getId() == null || gun.getId() == 0 || get(gun.getId()).isEmpty()) {
-            return modelMapper.map(gunRepository.save(gun), GunDto.class);
-        } else {
-            throw new GunConflictException("A gun with this id already exists");
+    public List<Gun> getAll() {
+        List<Gun> gunEntities = gunRepository.findAll();
+        List<Gun> guns = new ArrayList<>();
+        for (Gun entity : gunEntities) {
+            Gun gun = new Gun();
+            gun.setId(entity.getId());
+            gun.setName(entity.getName());
+            gun.setCategory(entity.getCategory());
+            gun.setGameRepresents(entity.getGameRepresents());
+            guns.add(gun);
         }
+        return guns;
+    }
+
+//    @Override
+//    public List<Gun> get(Long id) {
+//        List<Gun> gunEntities = gunRepository.findById(id);
+//        List<Gun> guns = new ArrayList<>();
+//        for (Gun entity : gunEntities) {
+//            Gun gun = new Gun();
+//            gun.setId(entity.getId());
+//            gun.setName(entity.getName());
+//            gun.setCategory(entity.getCategory());
+//            gun.setGameRepresents(entity.getGameRepresents());
+//            guns.add(gun);
+//        }
+//        return guns;
+//    }
+    @Override
+    public Optional<Gun> get(Long id) {
+        return gunRepository.findById(id)
+                .map(entity -> {
+                    Gun gun = new Gun();
+                    gun.setId(entity.getId());
+                    gun.setName(entity.getName());
+                    gun.setCategory(entity.getCategory());
+                    gun.setGameRepresents(entity.getGameRepresents());
+                    return gun;
+                });
     }
 
     @Override
-    public GunDto update(GunDto gunDto) {
-        if (gunRepository.findById(gunDto.getId()).isPresent()) {
-            return modelMapper.map(gunRepository.save(modelMapper.map(gunDto, Gun.class)), GunDto.class);
-        } else {
-            throw new GunNotFoundException(gunDto.getId());
-        }
+    public Gun register(Gun gun) {
+        Gun newGun = new Gun();
+        newGun.setName(gun.getName());
+        newGun.setCategory(gun.getCategory());
+        newGun.setGameRepresents(gun.getGameRepresents());
+        Gun savedEntity = gunRepository.save(newGun);
+
+        gun.setId(savedEntity.getId()); // Установка сгенерированного ID
+        return gun;
+    }
+
+    @Override
+    public Optional<Gun> editByName(String name, Gun updatedGun) {
+        Optional<Gun> existingGun = gunRepository.findByName(name);
+        return existingGun.map(entity -> {
+            entity.setName(updatedGun.getName());
+            entity.setCategory(updatedGun.getCategory());
+            entity.setGameRepresents(updatedGun.getGameRepresents());
+            Gun updatedEntity = gunRepository.save(entity);
+
+            updatedGun.setId(updatedEntity.getId());
+            updatedGun.setName(updatedEntity.getName());
+            updatedGun.setCategory(updatedEntity.getCategory());
+            updatedGun.setGameRepresents(updatedEntity.getGameRepresents());
+            return updatedGun;
+        });
     }
 
     @Override
@@ -64,12 +104,28 @@ public class GunServiceImpl implements GunService {
     }
 
     @Override
-    public List<GunDto> findAllByName(String name) {
-        return gunRepository.findAllByName(name).stream().map((s) -> modelMapper.map(s, GunDto.class)).collect(Collectors.toList());
+    public Optional<Gun> findByName(String name) {
+        return gunRepository.findByName(name)
+                .map(entity -> {
+                    Gun gun = new Gun();
+                    gun.setId(entity.getId());
+                    gun.setName(entity.getName());
+                    gun.setCategory(entity.getCategory());
+                    gun.setGameRepresents(entity.getGameRepresents());
+                    return gun;
+                });
     }
 
     @Override
-    public List<GunDto> findAllByCategory(String category) {
-        return gunRepository.findAllByCategory(category).stream().map((s) -> modelMapper.map(s, GunDto.class)).collect(Collectors.toList());
+    public Optional<Gun> findByCategory(String category) {
+        return gunRepository.findByCategory(category)
+                .map(entity -> {
+                    Gun gun = new Gun();
+                    gun.setId(entity.getId());
+                    gun.setName(entity.getName());
+                    gun.setCategory(entity.getCategory());
+                    gun.setGameRepresents(entity.getGameRepresents());
+                    return gun;
+                });
     }
 }

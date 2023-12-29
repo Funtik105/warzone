@@ -1,5 +1,7 @@
 package com.example.warzone.dtos;
 
+import com.example.warzone.dtos.gunservice.GunDto;
+
 public class LoadoutGunDto {
     private Long id;
     private GunDto gun;

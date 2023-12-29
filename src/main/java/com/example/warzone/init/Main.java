@@ -1,6 +1,7 @@
 package com.example.warzone.init;
 
 import com.example.warzone.dtos.*;
+import com.example.warzone.models.Gun;
 import com.example.warzone.servises.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,12 +44,12 @@ public class Main implements CommandLineRunner {
                 "non", "http://fubrufbebnf", "123456789", 50765);
         admin = usersService.register(admin);
 
-        GunDto gun1 = new GunDto(null, "Kastov 545", "Assault Rifles", "MW2");
+        Gun gun1 = new Gun("Kastov 545", "Assault Rifles", "MW2");
         gun1 = gunService.register(gun1);
 
-        NerfsAndBuffsDto nerfsAndBuffs1 = new NerfsAndBuffsDto(null, gun1, "10.10.2020", "name gun",
-                true, "changes");
-        nerfsAndBuffs1 = nerfsAndBuffsService.register(nerfsAndBuffs1);
+//        NerfsAndBuffsDto nerfsAndBuffs1 = new NerfsAndBuffsDto(null, gun1, "10.10.2020", "name gun",
+//                true, "changes");
+//        nerfsAndBuffs1 = nerfsAndBuffsService.register(nerfsAndBuffs1);
 
         LoadoutDto loadout1 = new LoadoutDto(null, admin, "perks", "guns", "description",
                 "10.10.2020", "11.10.2020", "yes");
@@ -62,13 +63,13 @@ public class Main implements CommandLineRunner {
                 "optic", "laser");
         metaList1 = metaListService.register(metaList1);
 
-        LoadoutGunDto loadoutGun1 = new LoadoutGunDto(null, gun1, loadout1, metaList1, "WSP Swarm", "Close Range",
-                "underBarrel", "Barrel", "stock",
-                "optic", "laser");
-        loadoutGun1 = loadoutGunService.register(loadoutGun1);
+//        LoadoutGunDto loadoutGun1 = new LoadoutGunDto(null, gun1, loadout1, metaList1, "WSP Swarm", "Close Range",
+//                "underBarrel", "Barrel", "stock",
+//                "optic", "laser");
+//        loadoutGun1 = loadoutGunService.register(loadoutGun1);
 
-        AttachmentsDto attachments1 = new AttachmentsDto(null, loadoutGun1, "SA Brake Barrel", ".50 GS",
-                (short) 8, "Control of the horizontal component of recoil, Control of barrel drift, Vertical recoil", "Aim speed");
-        attachments1 = attachmentService.register(attachments1);
+//        AttachmentsDto attachments1 = new AttachmentsDto(null, loadoutGun1, "SA Brake Barrel", ".50 GS",
+//                (short) 8, "Control of the horizontal component of recoil, Control of barrel drift, Vertical recoil", "Aim speed");
+//        attachments1 = attachmentService.register(attachments1);
     }
 }

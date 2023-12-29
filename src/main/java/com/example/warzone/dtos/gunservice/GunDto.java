@@ -1,4 +1,4 @@
-package com.example.warzone.dtos;
+package com.example.warzone.dtos.gunservice;
 
 public class GunDto {
     private Long id;

@@ -1,21 +1,23 @@
 package com.example.warzone.controllers;
 
-import com.example.warzone.controllers.exceptions.GunNotFoundException;
-import com.example.warzone.dtos.GunDto;
+import com.example.warzone.dtos.gunservice.FindGunsResponse;
+import com.example.warzone.models.Gun;
 import com.example.warzone.servises.GunService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Tag(name = "Gun", description = "API для получения всех оружий игры")
 @RestController
 @RequestMapping("/gunservice")
 public class GunController {
-    private GunService gunService;
+    private final GunService gunService;
 
     @Autowired
     public GunController(GunService gunService) {
@@ -24,45 +26,68 @@ public class GunController {
 
     @Operation(summary = "Получить все")
     @GetMapping("/all")
-    public List<GunDto> getGuns() {
-        return gunService.getAll();
+    public ResponseEntity<FindGunsResponse> findAllGuns() {
+        List<Gun> guns = gunService.getAll(); // Получение списка оружия
+        FindGunsResponse response = new FindGunsResponse();
+        response.setTotalCount(guns.size());
+        response.setBody(guns);
+        response.setErrors(new ArrayList<>()); // Пустой список ошибок
+
+        return ResponseEntity.ok(response);
     }
 
     @Operation(summary = "Получить по id")
     @GetMapping("/findById")
-    GunDto get(@PathVariable Long id) {
-        return gunService.get(id).orElseThrow(() -> new GunNotFoundException(id));
+    public ResponseEntity<Gun> get(@RequestParam Long id) {
+//        List<Gun> guns = gunService.get(id);
+////                .map(ResponseEntity::ok)
+////                .orElseGet(() -> ResponseEntity.notFound().build());
+//        FindGunsResponse response = new FindGunsResponse();
+//        response.setTotalCount(guns.size());
+//        response.setBody(guns);
+//        response.setErrors(new ArrayList<>());
+//
+//        return ResponseEntity.ok(response);
+
+        return gunService.get(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @Operation(summary = "Получить по имени")
+    @GetMapping("/findByName")
+    public ResponseEntity<Gun> getGunByName(@RequestParam String name) {
+        return gunService.findByName(name)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @Operation(summary = "Получить по категории")
+    @GetMapping("/findByCategory")
+    public ResponseEntity<Gun> getGunByCategory(@RequestParam String category) {
+        return gunService.findByCategory(category)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @Operation(summary = "Добавить новый")
     @PostMapping("/new")
-    GunDto create(@RequestBody GunDto gunDto) {
-        return gunService.register(gunDto);
+    public ResponseEntity<Gun> createGun(@RequestBody Gun gun) {
+        Gun savedGun = gunService.register(gun);
+        return new ResponseEntity<>(savedGun, HttpStatus.CREATED);
     }
 
-    @Operation(summary = "Обновить")
-    @PutMapping("/update")
-    GunDto update(@RequestBody GunDto gunDto) {
-        return gunService.update(gunDto);
+    @Operation(summary = "Обновить существующий по имени")
+    @PutMapping("/editByName")
+    public ResponseEntity<Gun> update(@RequestParam String name, @RequestBody Gun gun) {
+        return gunService.editByName(name, gun)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @Operation(summary = "Удалить")
-    @DeleteMapping("{id}")
-    void delete(@PathVariable Long id) {
+    @Operation(summary = "Удалить по id")
+    @DeleteMapping("/deleteById")
+    void delete(@RequestParam Long id) {
         gunService.delete(id);
-    }
-
-    @Operation(summary = "Получить по имени")
-    @GetMapping("/byName")
-    public ResponseEntity<List<GunDto>> getGunByName(@RequestParam String name) {
-        List<GunDto> guns = gunService.findAllByName(name);
-        return ResponseEntity.ok(guns);
-    }
-
-    @Operation(summary = "Получить по категории")
-    @GetMapping("/byCategory")
-    public ResponseEntity<List<GunDto>> getGunByCategory(@RequestParam String category) {
-        List<GunDto> guns = gunService.findAllByCategory(category);
-        return ResponseEntity.ok(guns);
     }
 }

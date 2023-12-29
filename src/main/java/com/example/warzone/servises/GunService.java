@@ -1,22 +1,22 @@
 package com.example.warzone.servises;
 
-import com.example.warzone.dtos.GunDto;
+import com.example.warzone.models.Gun;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface GunService {
-    List<GunDto> getAll();
+    List<Gun> getAll();
 
-    Optional<GunDto> get(Long id);
+    Optional<Gun> get(Long id);
 
-    GunDto register(GunDto gunDto);
+    Gun register(Gun gun);
 
-    GunDto update(GunDto gunDto);
+    Optional<Gun> editByName(String name, Gun updatedGun);
 
-    List<GunDto> findAllByName(String name);
+    Optional<Gun> findByName(String name);
 
-    List<GunDto> findAllByCategory(String category);
+    Optional<Gun> findByCategory(String category);
 
     void delete(Long id);
 }
