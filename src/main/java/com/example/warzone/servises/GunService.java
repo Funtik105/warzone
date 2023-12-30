@@ -11,13 +11,15 @@ public interface GunService {
 
     Optional<GunDto> get(Long id);
 
-    Gun register(Gun gun);
-
-    Optional<Gun> editByName(String name, Gun updatedGun);
-
     Optional<GunDto> findByName(String name);
 
     List<GunDto> findByCategory(String category);
+
+    List<GunDto> findByGameRepresents(String gameRepresents);
+
+    GunDto register(GunDto gun);
+
+    Optional<GunDto> editByName(String name, GunDto updatedGun);
 
     void delete(Long id);
 }

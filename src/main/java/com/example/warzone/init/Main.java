@@ -1,6 +1,7 @@
 package com.example.warzone.init;
 
 import com.example.warzone.dtos.*;
+import com.example.warzone.dtos.gunservice.GunDto;
 import com.example.warzone.models.Gun;
 import com.example.warzone.servises.*;
 import org.modelmapper.ModelMapper;
@@ -44,7 +45,7 @@ public class Main implements CommandLineRunner {
                 "non", "http://fubrufbebnf", "123456789", 50765);
         admin = usersService.register(admin);
 
-        Gun gun1 = new Gun("Kastov 545", "Assault Rifles", "MW2");
+        GunDto gun1 = new GunDto(null,"Kastov 545", "Assault Rifles", "MW2");
         gun1 = gunService.register(gun1);
 
 //        NerfsAndBuffsDto nerfsAndBuffs1 = new NerfsAndBuffsDto(null, gun1, "10.10.2020", "name gun",

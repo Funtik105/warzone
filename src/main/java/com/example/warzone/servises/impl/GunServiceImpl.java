@@ -5,7 +5,6 @@ import com.example.warzone.dtos.gunservice.GunDto;
 import com.example.warzone.models.Gun;
 import com.example.warzone.repositories.GunRepository;
 import com.example.warzone.servises.GunService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +14,10 @@ import java.util.Optional;
 
 @Service
 public class GunServiceImpl implements GunService{
-    private ModelMapper modelMapper;
     GunRepository gunRepository;
 
     @Autowired
-    public GunServiceImpl(GunRepository gunRepository, ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
+    public GunServiceImpl(GunRepository gunRepository) {
         this.gunRepository = gunRepository;
     }
 
@@ -53,7 +50,7 @@ public class GunServiceImpl implements GunService{
     }
 
     @Override
-    public Gun register(Gun gun) {
+    public GunDto register(GunDto gun) {
         Gun newGun = new Gun();
         newGun.setName(gun.getName());
         newGun.setCategory(gun.getCategory());
@@ -65,7 +62,7 @@ public class GunServiceImpl implements GunService{
     }
 
     @Override
-    public Optional<Gun> editByName(String name, Gun updatedGun) {
+    public Optional<GunDto> editByName(String name, GunDto updatedGun) {
         Optional<Gun> existingGun = gunRepository.findByName(name);
         return existingGun.map(entity -> {
             entity.setName(updatedGun.getName());
@@ -106,6 +103,21 @@ public class GunServiceImpl implements GunService{
     @Override
     public List<GunDto> findByCategory(String category) {
         List<Gun> gunEntities = gunRepository.findByCategory(category);
+        List<GunDto> guns = new ArrayList<>();
+        for (Gun entity : gunEntities) {
+            GunDto gun = new GunDto();
+            gun.setId(entity.getId());
+            gun.setName(entity.getName());
+            gun.setCategory(entity.getCategory());
+            gun.setGameRepresents(entity.getGameRepresents());
+            guns.add(gun);
+        }
+        return guns;
+    }
+
+    @Override
+    public List<GunDto> findByGameRepresents(String gameRepresents) {
+        List<Gun> gunEntities = gunRepository.findByGameRepresents(gameRepresents);
         List<GunDto> guns = new ArrayList<>();
         for (Gun entity : gunEntities) {
             GunDto gun = new GunDto();
