@@ -8,11 +8,11 @@ public class AttachmentsDto {
     private short levelsToOpen;
     private String advantages;
     private String disadvantages;
-    private String settingLimits;
 
-    protected AttachmentsDto() {};
+    protected AttachmentsDto() {
+    }
 
-    public AttachmentsDto(Long id, LoadoutGunDto loadoutGun, String name, String weaponsToOpen, short levelsToOpen, String advantages, String disadvantages, String settingLimits) {
+    public AttachmentsDto(Long id, LoadoutGunDto loadoutGun, String name, String weaponsToOpen, short levelsToOpen, String advantages, String disadvantages) {
         this.id = id;
         this.loadoutGun = loadoutGun;
         this.name = name;
@@ -20,7 +20,6 @@ public class AttachmentsDto {
         this.levelsToOpen = levelsToOpen;
         this.advantages = advantages;
         this.disadvantages = disadvantages;
-        this.settingLimits = settingLimits;
     }
 
     public Long getId() {
@@ -79,25 +78,15 @@ public class AttachmentsDto {
         this.disadvantages = disadvantages;
     }
 
-    public String getSettingLimits() {
-        return settingLimits;
-    }
-
-    public void setSettingLimits(String settingLimits) {
-        this.settingLimits = settingLimits;
-    }
-
     @Override
     public String toString() {
         return "AttachmentsDto{" +
                 "id=" + id +
-                ", loadoutGun=" + loadoutGun +
                 ", name='" + name + '\'' +
                 ", weaponsToOpen='" + weaponsToOpen + '\'' +
                 ", levelsToOpen=" + levelsToOpen +
                 ", advantages='" + advantages + '\'' +
                 ", disadvantages='" + disadvantages + '\'' +
-                ", settingLimits='" + settingLimits + '\'' +
                 '}';
     }
 }

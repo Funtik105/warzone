@@ -1,6 +1,7 @@
 package com.example.warzone.models;
 
 import jakarta.persistence.*;
+
 @MappedSuperclass
 public abstract class Base {
     @Id

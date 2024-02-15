@@ -15,11 +15,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 @Service
 public class UsersServiceImpl implements UsersService {
-    @Autowired
-    UsersRepository usersRepository;
-    @Autowired
     private ModelMapper modelMapper;
-    public UsersServiceImpl(UsersRepository usersRepository){
+    UsersRepository usersRepository;
+
+    @Autowired
+    public UsersServiceImpl(UsersRepository usersRepository, ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
         this.usersRepository = usersRepository;
     }
 

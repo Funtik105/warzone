@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class WarzoneApplication {
     @Bean
-    public ModelMapper modelMapper(){
+    public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
 
         modelMapper.getConfiguration()
@@ -22,5 +22,4 @@ public class WarzoneApplication {
     public static void main(String[] args) {
         SpringApplication.run(WarzoneApplication.class, args);
     }
-
 }

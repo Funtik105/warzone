@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
 import java.util.List;
+
 @Entity
 public class Users extends Base{
     @OneToMany(mappedBy = "user")
@@ -17,7 +18,8 @@ public class Users extends Base{
     private String password;
     private int followers;
 
-    protected Users() {};
+    protected Users() {
+    }
 
     public String getEmail() {
         return email;

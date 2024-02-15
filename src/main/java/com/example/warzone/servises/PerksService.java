@@ -7,11 +7,18 @@ import java.util.Optional;
 
 public interface PerksService {
     List<PerksDto> getAll();
+
     Optional<PerksDto> get(Long id);
+
     PerksDto register(PerksDto perksDto);
+
     PerksDto update(PerksDto perksDto);
+
     void delete(Long id);
+
     List<PerksDto> findAllByName(String name);
+
     List<PerksDto> findAllByType(String type);
+
     List<PerksDto> findAllByDescription(String description);
 }

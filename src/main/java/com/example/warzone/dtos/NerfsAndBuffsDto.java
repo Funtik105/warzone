@@ -1,11 +1,13 @@
 package com.example.warzone.dtos;
 
+import com.example.warzone.dtos.gunservice.GunDto;
+
 public class NerfsAndBuffsDto {
     private Long id;
     private GunDto gun;
     private String date;
     private String nameGun;
-    private  boolean status;
+    private boolean status;
     private String changes;
 
     public NerfsAndBuffsDto(Long id, GunDto gun, String date, String nameGun,
@@ -17,7 +19,9 @@ public class NerfsAndBuffsDto {
         this.status = status;
         this.changes = changes;
     }
-    protected NerfsAndBuffsDto() {};
+
+    protected NerfsAndBuffsDto() {
+    }
 
     public Long getId() {
         return id;

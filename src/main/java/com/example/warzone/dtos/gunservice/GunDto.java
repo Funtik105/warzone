@@ -1,18 +1,19 @@
-package com.example.warzone.dtos;
+package com.example.warzone.dtos.gunservice;
 
 public class GunDto {
     private Long id;
     private String name;
     private String category;
-    private String platform;
+    private String gameRepresents;
 
-    protected GunDto() {};
+    public GunDto() {
+    }
 
-    public GunDto(Long id,String name, String category, String platform) {
+    public GunDto(Long id, String name, String category, String gameRepresents) {
         this.id = id;
         this.name = name;
         this.category = category;
-        this.platform = platform;
+        this.gameRepresents = gameRepresents;
     }
 
     public Long getId() {
@@ -39,20 +40,21 @@ public class GunDto {
         this.category = category;
     }
 
-    public String getPlatform() {
-        return platform;
+    public String getGameRepresents() {
+        return gameRepresents;
     }
 
-    public void setPlatform(String platform) {
-        this.platform = platform;
+    public void setGameRepresents(String gameRepresents) {
+        this.gameRepresents = gameRepresents;
     }
 
     @Override
     public String toString() {
         return "GunDto{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", category='" + category + '\'' +
-                ", platform='" + platform + '\'' +
+                ", gameRepresents='" + gameRepresents + '\'' +
                 '}';
     }
 }
