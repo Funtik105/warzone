@@ -10,7 +10,7 @@ public class NerfsAndBuffs extends Base {
     @JoinColumn(name = "gun_id")
     private Gun gun;
     private String nameGun;
-    private String date;
+    private String date; //TODO: Change to date to Timestamp
     private boolean status;
     private String changes;
 

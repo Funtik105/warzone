@@ -1,15 +1,17 @@
 package com.example.warzone.dtos.gunservice;
 
+import com.example.warzone.models.GameRepresent;
+
 public class GunDto {
     private Long id;
     private String name;
     private String category;
-    private String gameRepresents;
+    private GameRepresent gameRepresents;
 
     public GunDto() {
     }
 
-    public GunDto(Long id, String name, String category, String gameRepresents) {
+    public GunDto(Long id, String name, String category, GameRepresent gameRepresents) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -40,11 +42,11 @@ public class GunDto {
         this.category = category;
     }
 
-    public String getGameRepresents() {
+    public GameRepresent getGameRepresents() {
         return gameRepresents;
     }
 
-    public void setGameRepresents(String gameRepresents) {
+    public void setGameRepresents(GameRepresent gameRepresents) {
         this.gameRepresents = gameRepresents;
     }
 

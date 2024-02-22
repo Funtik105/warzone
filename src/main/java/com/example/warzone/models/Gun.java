@@ -3,7 +3,6 @@ package com.example.warzone.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
 
 import java.util.List;
 
@@ -15,15 +14,11 @@ public class Gun extends Base {
     private LoadoutGun loadoutGun;
     private String name;
     private String category;
-    private String gameRepresents;
 
-    public Gun() {
-    }
+    @OneToMany(mappedBy = "gun")
+    private List<GameRepresent> gameRepresent;
 
-    public Gun(String name, String category, String gameRepresents) {
-        this.name = name;
-        this.category = category;
-        this.gameRepresents = gameRepresents;
+    protected Gun() {
     }
 
     public String getName() {
@@ -58,11 +53,11 @@ public class Gun extends Base {
         this.loadoutGun = loadoutGun;
     }
 
-    public String getGameRepresents() {
-        return gameRepresents;
+    public List<GameRepresent> getGameRepresent() {
+        return gameRepresent;
     }
 
-    public void setGameRepresents(String gameRepresents) {
-        this.gameRepresents = gameRepresents;
+    public void setGameRepresents(List<GameRepresent> gameRepresent) {
+        this.gameRepresent = gameRepresent;
     }
 }
