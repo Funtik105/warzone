@@ -1,16 +1,16 @@
-package com.example.warzone.dtos.gunservice;
+package com.example.warzone.dtos;
 
 import java.util.List;
 
-public class FindGunsResponse{
+public class FindResponse<T> {
     private int totalCount;
-    private List<GunDto> body;
+    private List<T> body;
     private List<String> errors;
 
-    public FindGunsResponse() {
+    public FindResponse() {
     }
 
-    public FindGunsResponse(int totalCount, List<GunDto> body, List<String> errors) {
+    public FindResponse(int totalCount ,List<T> body, List<String> errors) {
         this.totalCount = totalCount;
         this.body = body;
         this.errors = errors;
@@ -24,11 +24,15 @@ public class FindGunsResponse{
         this.totalCount = totalCount;
     }
 
-    public List<GunDto> getBody() {
+    public int getSize() {
+        return body != null ? body.size() : 0;
+    }
+
+    public List<T> getBody() {
         return body;
     }
 
-    public void setBody(List<GunDto> body) {
+    public void setBody(List<T> body) {
         this.body = body;
     }
 

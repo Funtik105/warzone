@@ -12,4 +12,5 @@ public interface GunRepository extends JpaRepository<Gun, Long> {
     List<Gun> findByCategory(String category);
 
     List<Gun> findByGameRepresents(String gameRepresents);
+
 }

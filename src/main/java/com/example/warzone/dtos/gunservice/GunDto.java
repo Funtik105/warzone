@@ -9,12 +9,6 @@ public class GunDto {
     public GunDto() {
     }
 
-    public GunDto(Long id, String name, String category, String gameRepresents) {
-        this.id = id;
-        this.name = name;
-        this.category = category;
-        this.gameRepresents = gameRepresents;
-    }
 
     public Long getId() {
         return id;

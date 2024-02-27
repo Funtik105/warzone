@@ -45,8 +45,8 @@ public class Main implements CommandLineRunner {
                 "non", "http://fubrufbebnf", "123456789", 50765);
         admin = usersService.register(admin);
 
-        GunDto gun1 = new GunDto(null,"Kastov 545", "Assault Rifles", "MW2");
-        gun1 = gunService.register(gun1);
+//        GunDto gun1 = new GunDto(null,"Kastov 545", "Assault Rifles", "MW2");
+//        gun1 = gunService.register(gun1);
 
 //        NerfsAndBuffsDto nerfsAndBuffs1 = new NerfsAndBuffsDto(null, gun1, "10.10.2020", "name gun",
 //                true, "changes");

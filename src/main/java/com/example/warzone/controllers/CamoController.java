@@ -2,15 +2,15 @@ package com.example.warzone.controllers;
 
 import com.example.warzone.dtos.FindResponse;
 import com.example.warzone.dtos.ResponseApi;
+import com.example.warzone.dtos.camoserivce.CamoDto;
 import com.example.warzone.dtos.gunservice.GunDto;
-import com.example.warzone.servises.GunService;
+import com.example.warzone.servises.CamoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,24 +20,23 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@Tag(name = "Gun", description = "API для получения всех оружий игры")
 @RestController
-@RequestMapping("/gunservice")
-public class GunController{
-    private final GunService gunService;
+@RequestMapping("/camo")
+public class CamoController {
+    private CamoService camoService;
 
     @Autowired
-    public GunController(GunService gunService) {
-        this.gunService = gunService;
+    public CamoController(CamoService camoService) {
+        this.camoService = camoService;
     }
 
     @PostMapping("/new")
-    @Operation(summary = "Добавить новое оружие")
+    @Operation(summary = "Добавить новый камуфляж")
     @ApiResponses(
             value = {
                     @ApiResponse(
                             responseCode = "201",
-                            description = "Новое оружие успешно создано",
+                            description = "Новый камуфляж успешно создано",
                             content = @Content(
                                     mediaType = "application/json",
                                     examples = @ExampleObject(
@@ -49,21 +48,21 @@ public class GunController{
                     @ApiResponse(responseCode = "403", description = "Доступ запрещен")
             }
     )
-    public ResponseEntity<ResponseApi> createGun(
+    public ResponseEntity<ResponseApi> createCamo(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     content = @Content(
                             mediaType = "application/json",
                             examples = @ExampleObject(
-                                    description = "Новое оружие",
-                                    value = "{\"name\": \"Kastov 545\", \"category\": \"Assault Rifles\", \"gameRepresents\": \"MW2\"}"
+                                    description = "Новый камуфляж",
+                                    value = "{\"name\": \"Kastov 545\", \"category\": \"Assault Rifles\", \"gameRepresents\": \"MW2\"}" // TODO: Поправить свагер
                             )
                     )
             )
 
-            @RequestBody GunDto gun) {
-        GunDto savedGun = gunService.register(gun);
+            @RequestBody CamoDto camo) {
+        CamoDto savedCamo = camoService.register(camo);
 
-        ResponseApi response = new ResponseApi(savedGun.getId(), new ArrayList<>());
+        ResponseApi response = new ResponseApi(savedCamo.getId(), new ArrayList<>());
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
@@ -77,41 +76,35 @@ public class GunController{
                             content = @Content(
                                     mediaType = "application/json",
                                     examples = @ExampleObject(
-                                            value = "{ \"totalCount\": 1, \"body\": [{ \"id\": 1, \"name\": \"Kastov 545\", \"category\": \"Assault Rifles\", \"gameRepresents\": \"MW2\" }], \"errors\": [] }"
+                                            value = "{ \"totalCount\": 1, \"body\": [{ \"id\": 1, \"name\": \"Kastov 545\", \"category\": \"Assault Rifles\", \"gameRepresents\": \"MW2\" }], \"errors\": [] }" //TODO: Поправить свагер
                                     )
                             )
                     ),
                     @ApiResponse(responseCode = "400", description = "Неверный запрос"),
-                    @ApiResponse(responseCode = "404", description = "Оружие не найдено")
+                    @ApiResponse(responseCode = "404", description = "Камуфляж не найден")
             }
     )
     public ResponseEntity<?> find(
-            @RequestParam(required = false) Long id,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String category,
+            @RequestParam(required = false) Long gun_id,
+            @RequestParam(required = false) String gunName,
             @RequestParam(required = false) String gameRepresents) {
 
-        if (id != null) {
-            return gunService.get(id)
-                    .map(ResponseEntity::ok)
-                    .orElseGet(() -> ResponseEntity.notFound().build());
-        } else if (name != null) {
-            List<GunDto> guns = gunService.findByName(name);
-            return buildFindGunsResponse(guns);
-        } else if (category != null) {
-            List<GunDto> guns = gunService.findByCategory(category);
-            return buildFindGunsResponse(guns);
+        if (gun_id != null) {
+            List<CamoDto> camos = camoService.findCamosByGunId(gun_id);
+            return buildFindGunsResponse(camos);
+        } else if (gunName != null) {
+            List<CamoDto> camos = camoService.findByGunName(gunName);
+            return buildFindGunsResponse(camos);
         } else if (gameRepresents != null) {
-            List<GunDto> guns = gunService.findByGameRepresents(gameRepresents);
-            return buildFindGunsResponse(guns);
+            List<CamoDto> camos = camoService.findByGameRepresents(gameRepresents);
+            return buildFindGunsResponse(camos);
         } else {
             // If no parameters are passed, return a list of all weapons
-            List<GunDto> guns = gunService.getAll();
-            return buildFindGunsResponse(guns);
+            List<CamoDto> camos = camoService.getAll();
+            return buildFindGunsResponse(camos);
         }
     }
-
-    private ResponseEntity<FindResponse<GunDto>> buildFindGunsResponse(List<GunDto> guns) {
+    private ResponseEntity<FindResponse<CamoDto>> buildFindGunsResponse(List<CamoDto> guns) {
         FindResponse response = new FindResponse();
         response.setTotalCount(guns.size());
         response.setBody(guns);
@@ -119,42 +112,23 @@ public class GunController{
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/edit")
-    @Operation(summary = "Обновить существующий по имени")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(responseCode = "200", description = "Оружие успешно обновлено"),
-                    @ApiResponse(responseCode = "400", description = "Неверный запрос"),
-                    @ApiResponse(responseCode = "403", description = "Доступ запрещён"),
-                    @ApiResponse(responseCode = "404", description = "Оружие не найдено")
-            }
-    )
-    public ResponseEntity<ResponseApi> update(
-            @Parameter(description = "Имя оружия", example = "Kastov 545")
-            @RequestParam String name,
-            @RequestBody GunDto gun
-    ) {
-        return gunService.editByName(name, gun)
-                .map(savedGun -> new ResponseEntity<>(new ResponseApi(savedGun.getId(), new ArrayList<>()), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(new ResponseApi(null, Collections.singletonList("Gun not found")), HttpStatus.NOT_FOUND));
-    }
 
     @DeleteMapping("/delete")
     @Operation(summary = "Удалить по id")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Оружие успешно обновлено"),
+                    @ApiResponse(responseCode = "200", description = "Камуфляж успешно обновлено"),
                     @ApiResponse(responseCode = "400", description = "Неверный запрос"),
                     @ApiResponse(responseCode = "403", description = "Доступ запрещён"),
-                    @ApiResponse(responseCode = "404", description = "Оружие не найдено")
+                    @ApiResponse(responseCode = "404", description = "Камуфляж не найден")
             }
     )
     public ResponseEntity<ResponseApi> delete(
-            @Parameter(description = "Имя оружия", example = "Kastov 545")
+            @Parameter(description = "Имя камуфляжа", example = "Interstellar")
             @RequestParam Long id
     ) {
         try {
-            gunService.delete(id);
+            camoService.delete(id);
             // Успешное выполнение
             return ResponseEntity.ok(new ResponseApi(true, new ArrayList<>()));
         } catch (Exception e) {
