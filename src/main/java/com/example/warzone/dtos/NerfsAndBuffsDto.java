@@ -1,19 +1,18 @@
 package com.example.warzone.dtos;
 
+import java.util.List;
+
 public class NerfsAndBuffsDto {
     private Long id;
     private GunDto gun;
     private String date;
-    private String nameGun;
     private boolean status;
-    private String changes;
+    private List<String> changes;
 
-    public NerfsAndBuffsDto(Long id, GunDto gun, String date, String nameGun,
-                            boolean status, String changes) {
+    public NerfsAndBuffsDto(Long id, GunDto gun, String date, boolean status, List<String> changes) {
         this.id = id;
         this.gun = gun;
         this.date = date;
-        this.nameGun = nameGun;
         this.status = status;
         this.changes = changes;
     }
@@ -45,13 +44,6 @@ public class NerfsAndBuffsDto {
         this.date = date;
     }
 
-    public String getNameGun() {
-        return nameGun;
-    }
-
-    public void setNameGun(String nameGun) {
-        this.nameGun = nameGun;
-    }
 
     public boolean isStatus() {
         return status;
@@ -61,11 +53,11 @@ public class NerfsAndBuffsDto {
         this.status = status;
     }
 
-    public String getChanges() {
+    public List<String> getChanges() {
         return changes;
     }
 
-    public void setChanges(String changes) {
+    public void setChanges(List<String> changes) {
         this.changes = changes;
     }
 
@@ -75,9 +67,9 @@ public class NerfsAndBuffsDto {
                 "id=" + id +
                 ", gun=" + gun +
                 ", date='" + date + '\'' +
-                ", nameGun='" + nameGun + '\'' +
                 ", status=" + status +
-                ", changes='" + changes + '\'' +
+                ", changes=" + changes +
                 '}';
     }
+
 }

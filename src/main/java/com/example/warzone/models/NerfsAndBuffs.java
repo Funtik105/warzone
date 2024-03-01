@@ -4,15 +4,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+import java.util.List;
+
 @Entity
 public class NerfsAndBuffs extends Base {
     @ManyToOne
     @JoinColumn(name = "gun_id")
     private Gun gun;
-    private String nameGun;
     private String date;
     private boolean status;
-    private String changes;
+    private List<String> changes;
 
     protected NerfsAndBuffs() {
     }
@@ -23,14 +24,6 @@ public class NerfsAndBuffs extends Base {
 
     public void setGun(Gun gun) {
         this.gun = gun;
-    }
-
-    public String getNameGun() {
-        return nameGun;
-    }
-
-    public void setNameGun(String nameGun) {
-        this.nameGun = nameGun;
     }
 
     public String getDate() {
@@ -49,11 +42,12 @@ public class NerfsAndBuffs extends Base {
         this.status = status;
     }
 
-    public String getChanges() {
+    public List<String> getChanges() {
         return changes;
     }
 
-    public void setChanges(String changes) {
+    public void setChanges(List<String> changes) {
         this.changes = changes;
     }
+
 }
