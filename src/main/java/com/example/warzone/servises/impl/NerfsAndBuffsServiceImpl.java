@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Service
 public class NerfsAndBuffsServiceImpl implements NerfsAndBuffsService {
     private ModelMapper modelMapper;
-    NerfsAndBuffsRepository nerfsAndBuffsRepository;
+    private final NerfsAndBuffsRepository nerfsAndBuffsRepository;
 
     @Autowired
     public NerfsAndBuffsServiceImpl(NerfsAndBuffsRepository nerfsAndBuffsRepository, ModelMapper modelMapper) {
@@ -28,7 +28,9 @@ public class NerfsAndBuffsServiceImpl implements NerfsAndBuffsService {
 
     @Override
     public List<NerfsAndBuffsDto> getAll() {
-        return nerfsAndBuffsRepository.findAll().stream().map((s) -> modelMapper.map(s, NerfsAndBuffsDto.class)).collect(Collectors.toList());
+        return nerfsAndBuffsRepository.findAll().stream()
+                .map((s) -> modelMapper.map(s, NerfsAndBuffsDto.class))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -39,11 +41,12 @@ public class NerfsAndBuffsServiceImpl implements NerfsAndBuffsService {
     @Override
     public NerfsAndBuffsDto register(NerfsAndBuffsDto nerfsAndBuffsDto) {
         NerfsAndBuffs nerfsAndBuffs = modelMapper.map(nerfsAndBuffsDto, NerfsAndBuffs.class);
-        if (nerfsAndBuffs.getId() == null || nerfsAndBuffs.getId() == 0 || get(nerfsAndBuffs.getId()).isEmpty()) {
-            return modelMapper.map(nerfsAndBuffsRepository.save(nerfsAndBuffs), NerfsAndBuffsDto.class);
-        } else {
-            throw new NerfsAndBuffsConflictException("A nerfandbuff with this id already exists");
-        }
+
+        NerfsAndBuffs savedNerfsAndBuffs = nerfsAndBuffsRepository.save(nerfsAndBuffs);
+
+        nerfsAndBuffsDto.setId(savedNerfsAndBuffs.getId());
+
+        return nerfsAndBuffsDto;
     }
 
     @Override

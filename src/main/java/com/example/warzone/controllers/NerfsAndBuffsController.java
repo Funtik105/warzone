@@ -1,20 +1,27 @@
 package com.example.warzone.controllers;
 
-import com.example.warzone.controllers.exceptions.NerfsAndBuffsNotFoundException;
 import com.example.warzone.dtos.NerfsAndBuffsDto;
+import com.example.warzone.dtos.response.FindResponse;
+import com.example.warzone.dtos.response.ResponseApi;
 import com.example.warzone.servises.NerfsAndBuffsService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-@Tag(name = "NerfsAndBuffs", description = "API для вложений")
 @RestController
-@RequestMapping("/nerfsandbuffs")
-public class NerfsAndBuffsController{
+@RequestMapping("/nerfsAndBuffs")
+public class NerfsAndBuffsController {
     private NerfsAndBuffsService nerfsAndBuffsService;
 
     @Autowired
@@ -22,54 +29,107 @@ public class NerfsAndBuffsController{
         this.nerfsAndBuffsService = nerfsAndBuffsService;
     }
 
-    @Operation(summary = "Получить все")
-    @GetMapping()
-    List<NerfsAndBuffsDto> all() {
-        return nerfsAndBuffsService.getAll();
+    @PostMapping("/new")
+    @Operation(summary = "Добавить новый нерф или бафф")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "201",
+                            description = "Новый нерф или бафф успешно создано",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    examples = @ExampleObject(
+                                            value = "{ \"body\": 1, \"errors\": \"[]\" }"
+                                    )
+                            )
+                    ),
+                    @ApiResponse(responseCode = "400", description = "Неверный запрос"),
+                    @ApiResponse(responseCode = "403", description = "Доступ запрещен")
+            }
+    )
+    public ResponseEntity<ResponseApi> createNerfsAndBuffs(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    content = @Content(
+                            mediaType = "application/json",
+                            examples = @ExampleObject(
+                                    description = "Новый нерф или бафф",
+                                    value = "{\"name\": \"Kastov 545\", \"category\": \"Assault Rifles\", \"gameRepresents\": \"MW2\"}" // TODO: Поправить свагер
+                            )
+                    )
+            )
+
+            @RequestBody NerfsAndBuffsDto nerfsAndBuffs) {
+        NerfsAndBuffsDto savedNerfsAndBuffs = nerfsAndBuffsService.register(nerfsAndBuffs);
+
+        ResponseApi response = new ResponseApi(savedNerfsAndBuffs.getId(), new ArrayList<>());
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @Operation(summary = "Получить по id")
-    @GetMapping("/{id}")
-    NerfsAndBuffsDto get(@PathVariable Long id) {
-        return nerfsAndBuffsService.get(id).orElseThrow(() -> new NerfsAndBuffsNotFoundException(id));
+    @GetMapping("/find")
+    @Operation(summary = "Получить все или по опредленному параметру")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Операция успешно выполнена",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    examples = @ExampleObject(
+                                            value = "{ \"totalCount\": 1, \"body\": [{ \"id\": 1, \"name\": \"Kastov 545\", \"category\": \"Assault Rifles\", \"gameRepresents\": \"MW2\" }], \"errors\": [] }" //TODO: Поправить свагер
+                                    )
+                            )
+                    ),
+                    @ApiResponse(responseCode = "400", description = "Неверный запрос"),
+                    @ApiResponse(responseCode = "404", description = "Нерф или бафф не найден")
+            }
+    )
+    public ResponseEntity<?> find(
+            @RequestParam(required = false) String nameGun,
+            @RequestParam(required = false) Boolean status) {
+
+        if (nameGun != null) {
+            List<NerfsAndBuffsDto> nerfsAndBuffs = nerfsAndBuffsService.findAllByNameGun(nameGun);
+            return buildFindNerfsAndBuffsResponse(nerfsAndBuffs);
+        } else if (status != null) {
+            List<NerfsAndBuffsDto> nerfsAndBuffs = nerfsAndBuffsService.findAllByStatus(status);
+            return buildFindNerfsAndBuffsResponse(nerfsAndBuffs);
+        } else {
+            // If no parameters are passed, return a list of all weapons
+            List<NerfsAndBuffsDto> nerfsAndBuffs = nerfsAndBuffsService.getAll();
+            return buildFindNerfsAndBuffsResponse(nerfsAndBuffs);
+        }
     }
 
-    @Operation(summary = "Создать")
-    @PostMapping()
-    NerfsAndBuffsDto create(@RequestBody NerfsAndBuffsDto nerfsAndBuffsDto) {
-        return nerfsAndBuffsService.register(nerfsAndBuffsDto);
+    private ResponseEntity<FindResponse<NerfsAndBuffsDto>> buildFindNerfsAndBuffsResponse(List<NerfsAndBuffsDto> nerfsAndBuffs) {
+        FindResponse response = new FindResponse();
+        response.setTotalCount(nerfsAndBuffs.size());
+        response.setBody(nerfsAndBuffs);
+        response.setErrors(new ArrayList<>());
+        return ResponseEntity.ok(response);
     }
 
-    @Operation(summary = "Обновить")
-    @PutMapping()
-    NerfsAndBuffsDto update(@RequestBody NerfsAndBuffsDto nerfsAndBuffsDto) {
-        return nerfsAndBuffsService.update(nerfsAndBuffsDto);
-    }
 
-    @Operation(summary = "Удалить")
-    @DeleteMapping("/{id}")
-    void delete(@PathVariable Long id) {
-        nerfsAndBuffsService.delete(id);
-    }
-
-    @Operation(summary = "Получить по дате")
-    @GetMapping("/byDate")
-    ResponseEntity<List<NerfsAndBuffsDto>> getNerfsAndBuffsByDate(@RequestParam String date) {
-        List<NerfsAndBuffsDto> nerfsAndBuffs = nerfsAndBuffsService.findAllByDate(date);
-        return ResponseEntity.ok(nerfsAndBuffs);
-    }
-
-    @Operation(summary = "Получить по имени оружия")
-    @GetMapping("/byNameGun")
-    ResponseEntity<List<NerfsAndBuffsDto>> getNerfsAndBuffsByNameGun(@RequestParam String nameGun) {
-        List<NerfsAndBuffsDto> nerfsAndBuffs = nerfsAndBuffsService.findAllByNameGun(nameGun);
-        return ResponseEntity.ok(nerfsAndBuffs);
-    }
-
-    @Operation(summary = "Получить по статусу")
-    @GetMapping("/byStatus")
-    ResponseEntity<List<NerfsAndBuffsDto>> getNerfsAndBuffsByStatus(@RequestParam boolean status) {
-        List<NerfsAndBuffsDto> nerfsAndBuffs = nerfsAndBuffsService.findAllByStatus(status);
-        return ResponseEntity.ok(nerfsAndBuffs);
+    @DeleteMapping("/delete")
+    @Operation(summary = "Удалить по id")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Нерф или бафф успешно обновлено"),
+                    @ApiResponse(responseCode = "400", description = "Неверный запрос"),
+                    @ApiResponse(responseCode = "403", description = "Доступ запрещён"),
+                    @ApiResponse(responseCode = "404", description = "Нерф или бафф не найден")
+            }
+    )
+    public ResponseEntity<ResponseApi> delete(
+            @Parameter(description = "Имя нерфа или бафа", example = "Нерф Kastov545")
+            @RequestParam Long id
+    ) {
+        try {
+            nerfsAndBuffsService.delete(id);
+            // Успешное выполнение
+            return ResponseEntity.ok(new ResponseApi(true, new ArrayList<>()));
+        } catch (Exception e) {
+            // Обработка ошибки
+            return new ResponseEntity<>(new ResponseApi(false, Collections.singletonList(e.getMessage())), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
