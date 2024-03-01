@@ -1,7 +1,7 @@
 package com.example.warzone.servises.impl;
 
 import com.example.warzone.controllers.exceptions.GunNotFoundException;
-import com.example.warzone.dtos.gunservice.GunDto;
+import com.example.warzone.dtos.GunDto;
 import com.example.warzone.models.Gun;
 import com.example.warzone.repositories.GunRepository;
 import com.example.warzone.servises.GunService;
@@ -9,7 +9,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

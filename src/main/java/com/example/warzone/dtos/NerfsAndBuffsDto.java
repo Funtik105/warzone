@@ -1,7 +1,5 @@
 package com.example.warzone.dtos;
 
-import com.example.warzone.dtos.gunservice.GunDto;
-
 public class NerfsAndBuffsDto {
     private Long id;
     private GunDto gun;

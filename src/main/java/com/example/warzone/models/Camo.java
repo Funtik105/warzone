@@ -17,6 +17,7 @@ public class Camo extends Base{
     protected Camo() {
     }
 
+
     public Gun getGun() {
         return gun;
     }

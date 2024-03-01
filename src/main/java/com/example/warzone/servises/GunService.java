@@ -1,7 +1,6 @@
 package com.example.warzone.servises;
 
-import com.example.warzone.dtos.gunservice.GunDto;
-import com.example.warzone.models.Gun;
+import com.example.warzone.dtos.GunDto;
 
 import java.util.List;
 import java.util.Optional;

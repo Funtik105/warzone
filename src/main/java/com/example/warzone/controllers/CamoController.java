@@ -1,9 +1,8 @@
 package com.example.warzone.controllers;
 
-import com.example.warzone.dtos.FindResponse;
-import com.example.warzone.dtos.ResponseApi;
-import com.example.warzone.dtos.camoserivce.CamoDto;
-import com.example.warzone.dtos.gunservice.GunDto;
+import com.example.warzone.dtos.response.FindResponse;
+import com.example.warzone.dtos.response.ResponseApi;
+import com.example.warzone.dtos.CamoDto;
 import com.example.warzone.servises.CamoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -86,28 +85,30 @@ public class CamoController {
     )
     public ResponseEntity<?> find(
             @RequestParam(required = false) Long gun_id,
-            @RequestParam(required = false) String gunName,
-            @RequestParam(required = false) String gameRepresents) {
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) Boolean status) {
 
         if (gun_id != null) {
             List<CamoDto> camos = camoService.findCamosByGunId(gun_id);
-            return buildFindGunsResponse(camos);
-        } else if (gunName != null) {
-            List<CamoDto> camos = camoService.findByGunName(gunName);
-            return buildFindGunsResponse(camos);
-        } else if (gameRepresents != null) {
-            List<CamoDto> camos = camoService.findByGameRepresents(gameRepresents);
-            return buildFindGunsResponse(camos);
+            return buildFindCamosResponse(camos);
+        } else
+        if (title != null) {
+            List<CamoDto> camos = camoService.findCamosByTitle(title);
+            return buildFindCamosResponse(camos);
+        } else if (status != null) {
+            List<CamoDto> camos = camoService.findCamosByStatus(status);
+            return buildFindCamosResponse(camos);
         } else {
             // If no parameters are passed, return a list of all weapons
             List<CamoDto> camos = camoService.getAll();
-            return buildFindGunsResponse(camos);
+            return buildFindCamosResponse(camos);
         }
     }
-    private ResponseEntity<FindResponse<CamoDto>> buildFindGunsResponse(List<CamoDto> guns) {
+
+    private ResponseEntity<FindResponse<CamoDto>> buildFindCamosResponse(List<CamoDto> camos) {
         FindResponse response = new FindResponse();
-        response.setTotalCount(guns.size());
-        response.setBody(guns);
+        response.setTotalCount(camos.size());
+        response.setBody(camos);
         response.setErrors(new ArrayList<>());
         return ResponseEntity.ok(response);
     }
