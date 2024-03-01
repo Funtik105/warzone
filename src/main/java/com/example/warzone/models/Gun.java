@@ -13,8 +13,6 @@ public class Gun extends Base {
     private List<NerfsAndBuffs> nerfsAndBuffs;
     @OneToOne(mappedBy = "gun")
     private LoadoutGun loadoutGun;
-    @OneToMany(mappedBy = "gun")
-    private List<Camo> camo;
     private String name;
     private String category;
     private String gameRepresents;
@@ -50,14 +48,6 @@ public class Gun extends Base {
 
     public void setNerfsAndBuffs(List<NerfsAndBuffs> nerfsAndBuffs) {
         this.nerfsAndBuffs = nerfsAndBuffs;
-    }
-
-    public List<Camo> getCamo() {
-        return camo;
-    }
-
-    public void setCamo(List<Camo> camo) {
-        this.camo = camo;
     }
 
     public LoadoutGun getLoadoutGun() {

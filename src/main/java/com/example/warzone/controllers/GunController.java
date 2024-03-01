@@ -1,7 +1,7 @@
 package com.example.warzone.controllers;
 
-import com.example.warzone.dtos.FindResponse;
-import com.example.warzone.dtos.ResponseApi;
+import com.example.warzone.dtos.gunservice.ApiGunResponse;
+import com.example.warzone.dtos.gunservice.FindGunsResponse;
 import com.example.warzone.dtos.gunservice.GunDto;
 import com.example.warzone.servises.GunService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -49,7 +49,7 @@ public class GunController{
                     @ApiResponse(responseCode = "403", description = "Доступ запрещен")
             }
     )
-    public ResponseEntity<ResponseApi> createGun(
+    public ResponseEntity<ApiGunResponse> createGun(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     content = @Content(
                             mediaType = "application/json",
@@ -63,7 +63,7 @@ public class GunController{
             @RequestBody GunDto gun) {
         GunDto savedGun = gunService.register(gun);
 
-        ResponseApi response = new ResponseApi(savedGun.getId(), new ArrayList<>());
+        ApiGunResponse response = new ApiGunResponse(savedGun.getId(), new ArrayList<>());
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
@@ -96,8 +96,9 @@ public class GunController{
                     .map(ResponseEntity::ok)
                     .orElseGet(() -> ResponseEntity.notFound().build());
         } else if (name != null) {
-            List<GunDto> guns = gunService.findByName(name);
-            return buildFindGunsResponse(guns);
+            return gunService.findByName(name)
+                    .map(ResponseEntity::ok)
+                    .orElseGet(() -> ResponseEntity.notFound().build());
         } else if (category != null) {
             List<GunDto> guns = gunService.findByCategory(category);
             return buildFindGunsResponse(guns);
@@ -111,8 +112,8 @@ public class GunController{
         }
     }
 
-    private ResponseEntity<FindResponse<GunDto>> buildFindGunsResponse(List<GunDto> guns) {
-        FindResponse response = new FindResponse();
+    private ResponseEntity<FindGunsResponse> buildFindGunsResponse(List<GunDto> guns) {
+        FindGunsResponse response = new FindGunsResponse();
         response.setTotalCount(guns.size());
         response.setBody(guns);
         response.setErrors(new ArrayList<>());
@@ -129,14 +130,14 @@ public class GunController{
                     @ApiResponse(responseCode = "404", description = "Оружие не найдено")
             }
     )
-    public ResponseEntity<ResponseApi> update(
+    public ResponseEntity<ApiGunResponse> update(
             @Parameter(description = "Имя оружия", example = "Kastov 545")
             @RequestParam String name,
             @RequestBody GunDto gun
     ) {
         return gunService.editByName(name, gun)
-                .map(savedGun -> new ResponseEntity<>(new ResponseApi(savedGun.getId(), new ArrayList<>()), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(new ResponseApi(null, Collections.singletonList("Gun not found")), HttpStatus.NOT_FOUND));
+                .map(savedGun -> new ResponseEntity<>(new ApiGunResponse(savedGun.getId(), new ArrayList<>()), HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(new ApiGunResponse(null, Collections.singletonList("Gun not found")), HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/delete")
@@ -149,17 +150,17 @@ public class GunController{
                     @ApiResponse(responseCode = "404", description = "Оружие не найдено")
             }
     )
-    public ResponseEntity<ResponseApi> delete(
+    public ResponseEntity<ApiGunResponse> delete(
             @Parameter(description = "Имя оружия", example = "Kastov 545")
             @RequestParam Long id
     ) {
         try {
             gunService.delete(id);
             // Успешное выполнение
-            return ResponseEntity.ok(new ResponseApi(true, new ArrayList<>()));
+            return ResponseEntity.ok(new ApiGunResponse(true, new ArrayList<>()));
         } catch (Exception e) {
             // Обработка ошибки
-            return new ResponseEntity<>(new ResponseApi(false, Collections.singletonList(e.getMessage())), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new ApiGunResponse(false, Collections.singletonList(e.getMessage())), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

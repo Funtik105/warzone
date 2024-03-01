@@ -5,34 +5,48 @@ import com.example.warzone.dtos.gunservice.GunDto;
 import com.example.warzone.models.Gun;
 import com.example.warzone.repositories.GunRepository;
 import com.example.warzone.servises.GunService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class GunServiceImpl implements GunService{
     GunRepository gunRepository;
-    private ModelMapper modelMapper;
 
     @Autowired
-    public GunServiceImpl(GunRepository gunRepository, ModelMapper modelMapper) {
+    public GunServiceImpl(GunRepository gunRepository) {
         this.gunRepository = gunRepository;
-        this.modelMapper = modelMapper;
     }
 
     @Override
     public List<GunDto> getAll() {
-        return gunRepository.findAll().stream().map((s) -> modelMapper.map(s, GunDto.class)).collect(Collectors.toList());
+        List<Gun> gunEntities = gunRepository.findAll();
+        List<GunDto> guns = new ArrayList<>();
+        for (Gun entity : gunEntities) {
+            GunDto gun = new GunDto();
+            gun.setId(entity.getId());
+            gun.setName(entity.getName());
+            gun.setCategory(entity.getCategory());
+            gun.setGameRepresents(entity.getGameRepresents());
+            guns.add(gun);
+        }
+        return guns;
     }
 
     @Override
     public Optional<GunDto> get(Long id) {
-        return gunRepository.findById(id).map((s) -> modelMapper.map(s, GunDto.class));
+        return gunRepository.findById(id)
+                .map(entity -> {
+                    GunDto gun = new GunDto();
+                    gun.setId(entity.getId());
+                    gun.setName(entity.getName());
+                    gun.setCategory(entity.getCategory());
+                    gun.setGameRepresents(entity.getGameRepresents());
+                    return gun;
+                });
     }
 
     @Override
@@ -74,17 +88,45 @@ public class GunServiceImpl implements GunService{
     }
 
     @Override
-    public List<GunDto> findByName(String name) {
-        return gunRepository.findByName(name).stream().map((s) -> modelMapper.map(s, GunDto.class)).collect(Collectors.toList());
+    public Optional<GunDto> findByName(String name) {
+        return gunRepository.findByName(name)
+                .map(entity -> {
+                    GunDto gun = new GunDto();
+                    gun.setId(entity.getId());
+                    gun.setName(entity.getName());
+                    gun.setCategory(entity.getCategory());
+                    gun.setGameRepresents(entity.getGameRepresents());
+                    return gun;
+                });
     }
 
     @Override
     public List<GunDto> findByCategory(String category) {
-        return gunRepository.findByCategory(category).stream().map((s) -> modelMapper.map(s, GunDto.class)).collect(Collectors.toList());
+        List<Gun> gunEntities = gunRepository.findByCategory(category);
+        List<GunDto> guns = new ArrayList<>();
+        for (Gun entity : gunEntities) {
+            GunDto gun = new GunDto();
+            gun.setId(entity.getId());
+            gun.setName(entity.getName());
+            gun.setCategory(entity.getCategory());
+            gun.setGameRepresents(entity.getGameRepresents());
+            guns.add(gun);
+        }
+        return guns;
     }
 
     @Override
     public List<GunDto> findByGameRepresents(String gameRepresents) {
-        return gunRepository.findByGameRepresents(gameRepresents).stream().map((s) -> modelMapper.map(s, GunDto.class)).collect(Collectors.toList());
+        List<Gun> gunEntities = gunRepository.findByGameRepresents(gameRepresents);
+        List<GunDto> guns = new ArrayList<>();
+        for (Gun entity : gunEntities) {
+            GunDto gun = new GunDto();
+            gun.setId(entity.getId());
+            gun.setName(entity.getName());
+            gun.setCategory(entity.getCategory());
+            gun.setGameRepresents(entity.getGameRepresents());
+            guns.add(gun);
+        }
+        return guns;
     }
 }

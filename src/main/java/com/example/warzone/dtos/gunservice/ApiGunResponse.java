@@ -1,12 +1,12 @@
-package com.example.warzone.dtos;
+package com.example.warzone.dtos.gunservice;
 
 import java.util.List;
 
-public class ResponseApi {
+public class ApiGunResponse{
     private Object body;
     private List<String> errors;
 
-    public ResponseApi(Object body, List<String> errors) {
+    public ApiGunResponse(Object body, List<String> errors) {
         this.body = body;
         this.errors = errors;
     }
