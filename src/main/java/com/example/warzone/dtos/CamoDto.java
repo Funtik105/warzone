@@ -1,4 +1,4 @@
-package com.example.warzone.dtos.camoserivce;
+package com.example.warzone.dtos;
 
 public class CamoDto {
     private Long id;
@@ -9,6 +9,7 @@ public class CamoDto {
 
     public CamoDto() {
     }
+
 
     public Long getId() {
         return id;

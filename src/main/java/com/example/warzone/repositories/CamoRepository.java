@@ -13,4 +13,6 @@ public interface CamoRepository extends JpaRepository<Camo, Long> {
     List<Camo> findByGunName(String gunName);
     @Query("SELECT c FROM Camo c JOIN c.gun g WHERE g.id =: gun_id")
     List<Camo> findCamosByGunId(Long gun_id);
+    List<Camo> findCamosByTitle(String title);
+    List<Camo> findCamosByStatus(boolean status);
 }

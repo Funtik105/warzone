@@ -1,8 +1,8 @@
 package com.example.warzone.controllers;
 
-import com.example.warzone.dtos.FindResponse;
-import com.example.warzone.dtos.ResponseApi;
-import com.example.warzone.dtos.gunservice.GunDto;
+import com.example.warzone.dtos.response.FindResponse;
+import com.example.warzone.dtos.response.ResponseApi;
+import com.example.warzone.dtos.GunDto;
 import com.example.warzone.servises.GunService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

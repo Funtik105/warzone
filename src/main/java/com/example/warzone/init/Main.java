@@ -1,8 +1,6 @@
 package com.example.warzone.init;
 
 import com.example.warzone.dtos.*;
-import com.example.warzone.dtos.gunservice.GunDto;
-import com.example.warzone.models.Gun;
 import com.example.warzone.servises.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,7 @@ public class Main implements CommandLineRunner {
     private MetaListService metaListService;
     private NerfsAndBuffsService nerfsAndBuffsService;
     private LoadoutGunService loadoutGunService;
+    private CamoService camoService;
 
     @Autowired
     public Main(ModelMapper modelMapper, AttachmentService attachmentService, GunService gunService, UsersService usersService, LoadoutService loadoutService, PerksService perksService, MetaListService metaListService, NerfsAndBuffsService nerfsAndBuffsService, LoadoutGunService loadoutGunService) {
@@ -41,6 +40,15 @@ public class Main implements CommandLineRunner {
 
     private void seedData() {
 
+//        // Создайте и зарегистрируйте новый CamoDto
+//        CamoDto camoDto = new CamoDto();
+//        camoDto.setTitle("Название камуфляжа");
+//        camoDto.setDescription("Описание камуфляжа");
+//        camoDto.setImage("URL изображения");
+//        camoDto.setStatus(true);
+//
+//        camoDto = camoService.register(camoDto);
+
         UsersDto admin = new UsersDto(null, "vadim@mail.ru", "Vadim", "AngryL1on", "admin hahaha",
                 "non", "http://fubrufbebnf", "123456789", 50765);
         admin = usersService.register(admin);
@@ -51,6 +59,8 @@ public class Main implements CommandLineRunner {
 //        NerfsAndBuffsDto nerfsAndBuffs1 = new NerfsAndBuffsDto(null, gun1, "10.10.2020", "name gun",
 //                true, "changes");
 //        nerfsAndBuffs1 = nerfsAndBuffsService.register(nerfsAndBuffs1);
+
+
 
         LoadoutDto loadout1 = new LoadoutDto(null, admin, "perks", "guns", "description",
                 "10.10.2020", "11.10.2020", "yes");
