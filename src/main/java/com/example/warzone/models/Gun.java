@@ -1,16 +1,14 @@
 package com.example.warzone.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
+@Table(name = "gun")
 public class Gun extends Base {
     @OneToMany(mappedBy = "gun")
-    private List<NerfsAndBuffs> nerfsAndBuffs;
+    private List<RebalancedGun> rebalancedGun;
     @OneToOne(mappedBy = "gun")
     private LoadoutGun loadoutGun;
     @OneToMany(mappedBy = "gun")
@@ -19,13 +17,7 @@ public class Gun extends Base {
     private String category;
     private String gameRepresents;
 
-    public Gun() {
-    }
-
-    public Gun(String name, String category, String gameRepresents) {
-        this.name = name;
-        this.category = category;
-        this.gameRepresents = gameRepresents;
+    protected Gun() {
     }
 
     public String getName() {
@@ -44,12 +36,12 @@ public class Gun extends Base {
         this.category = category;
     }
 
-    public List<NerfsAndBuffs> getNerfsAndBuffs() {
-        return nerfsAndBuffs;
+    public List<RebalancedGun> getRebalancedGun() {
+        return rebalancedGun;
     }
 
-    public void setNerfsAndBuffs(List<NerfsAndBuffs> nerfsAndBuffs) {
-        this.nerfsAndBuffs = nerfsAndBuffs;
+    public void setRebalancedGun(List<RebalancedGun> rebalancedGun) {
+        this.rebalancedGun = rebalancedGun;
     }
 
     public List<Camo> getCamo() {

@@ -21,6 +21,14 @@ public class Users extends Base{
     protected Users() {
     }
 
+    public List<Loadout> getLoadOuts() {
+        return loadOuts;
+    }
+
+    public void setLoadOuts(List<Loadout> loadOuts) {
+        this.loadOuts = loadOuts;
+    }
+
     public String getEmail() {
         return email;
     }

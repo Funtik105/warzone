@@ -1,7 +1,6 @@
 package com.example.warzone.servises.impl;
 
 import com.example.warzone.controllers.exceptions.LoadoutNotFoundException;
-import com.example.warzone.controllers.exceptions.NerfsAndBuffsConflictException;
 import com.example.warzone.controllers.exceptions.NerfsAndBuffsNotFoundException;
 import com.example.warzone.dtos.NerfsAndBuffsDto;
 import com.example.warzone.models.NerfsAndBuffs;
@@ -45,7 +44,6 @@ public class NerfsAndBuffsServiceImpl implements NerfsAndBuffsService {
         NerfsAndBuffs savedNerfsAndBuffs = nerfsAndBuffsRepository.save(nerfsAndBuffs);
 
         nerfsAndBuffsDto.setId(savedNerfsAndBuffs.getId());
-
         return nerfsAndBuffsDto;
     }
 
@@ -77,8 +75,4 @@ public class NerfsAndBuffsServiceImpl implements NerfsAndBuffsService {
         return nerfsAndBuffsRepository.findAllByNameGun(nameGun).stream().map((s) -> modelMapper.map(s, NerfsAndBuffsDto.class)).collect(Collectors.toList());
     }
 
-    @Override
-    public List<NerfsAndBuffsDto> findAllByStatus(boolean status) {
-        return nerfsAndBuffsRepository.findAllByStatus(status).stream().map((s) -> modelMapper.map(s, NerfsAndBuffsDto.class)).collect(Collectors.toList());
-    }
 }

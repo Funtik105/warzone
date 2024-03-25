@@ -4,17 +4,14 @@ import java.util.List;
 
 public class NerfsAndBuffsDto {
     private Long id;
-    private GunDto gun;
+    private String patchName;
+    private List<RebalancedGunDto> rebalancedGun;
     private String date;
-    private boolean status;
-    private List<String> changes;
 
-    public NerfsAndBuffsDto(Long id, GunDto gun, String date, boolean status, List<String> changes) {
+    public NerfsAndBuffsDto(Long id,String patchName, String date) {
         this.id = id;
-        this.gun = gun;
+        this.patchName = patchName;
         this.date = date;
-        this.status = status;
-        this.changes = changes;
     }
 
     protected NerfsAndBuffsDto() {
@@ -28,12 +25,24 @@ public class NerfsAndBuffsDto {
         this.id = id;
     }
 
-    public GunDto getGun() {
-        return gun;
+    public String getPatchName() {
+        return patchName;
     }
 
-    public void setGun(GunDto gun) {
-        this.gun = gun;
+    public void setPatchName(String patchName) {
+        this.patchName = patchName;
+    }
+
+    public void setRebalancedGun(List<RebalancedGunDto> rebalancedGun) {
+        this.rebalancedGun = rebalancedGun;
+    }
+
+    public List<RebalancedGunDto> getRebalancedGun() {
+        return rebalancedGun;
+    }
+
+    public void setRebalancedGunDto(List<RebalancedGunDto> rebalancedGun) {
+        this.rebalancedGun = rebalancedGun;
     }
 
     public String getDate() {
@@ -44,32 +53,12 @@ public class NerfsAndBuffsDto {
         this.date = date;
     }
 
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public List<String> getChanges() {
-        return changes;
-    }
-
-    public void setChanges(List<String> changes) {
-        this.changes = changes;
-    }
-
     @Override
     public String toString() {
         return "NerfsAndBuffsDto{" +
                 "id=" + id +
-                ", gun=" + gun +
+                ", rebalancedGun=" + rebalancedGun +
                 ", date='" + date + '\'' +
-                ", status=" + status +
-                ", changes=" + changes +
                 '}';
     }
-
 }

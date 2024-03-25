@@ -35,15 +35,13 @@ public class GunServiceImpl implements GunService{
     }
 
     @Override
-    public GunDto register(GunDto gun) {
-        Gun newGun = new Gun();
-        newGun.setName(gun.getName());
-        newGun.setCategory(gun.getCategory());
-        newGun.setGameRepresents(gun.getGameRepresents());
-        Gun savedEntity = gunRepository.save(newGun);
+    public GunDto register(GunDto gunDto) {
+        Gun gun = modelMapper.map(gunDto, Gun.class);
+        Gun savedGun = gunRepository.save(gun);
 
-        gun.setId(savedEntity.getId()); // Установка сгенерированного ID
-        return gun;
+        gunDto.setId(savedGun.getId());
+
+        return gunDto;
     }
 
     @Override

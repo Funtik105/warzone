@@ -7,9 +7,16 @@ public class CamoDto {
     private String image;
     private boolean status;
 
-    public CamoDto() {
+    protected CamoDto() {
     }
 
+    public CamoDto(Long id, String title, String description, String image, boolean status) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.image = image;
+        this.status = status;
+    }
 
     public Long getId() {
         return id;

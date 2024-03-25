@@ -20,5 +20,4 @@ public interface NerfsAndBuffsService {
 
     List<NerfsAndBuffsDto> findAllByNameGun(String nameGun);
 
-    List<NerfsAndBuffsDto> findAllByStatus(boolean status);
 }

@@ -9,8 +9,7 @@ import java.util.List;
 public interface NerfsAndBuffsRepository extends JpaRepository<NerfsAndBuffs, Long> {
     List<NerfsAndBuffs> findAllByDate(String date);
 
-    @Query("SELECT n FROM NerfsAndBuffs n JOIN n.gun g WHERE g.name = :nameGun")
+    @Query("SELECT n FROM NerfsAndBuffs n JOIN n.rebalancedGun r JOIN r.gun g WHERE g.name = :nameGun")
     List<NerfsAndBuffs> findAllByNameGun(String nameGun);
 
-    List<NerfsAndBuffs> findAllByStatus(boolean status);
 }
