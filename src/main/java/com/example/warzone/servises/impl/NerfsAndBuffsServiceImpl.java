@@ -1,7 +1,6 @@
 package com.example.warzone.servises.impl;
 
 import com.example.warzone.controllers.exceptions.LoadoutNotFoundException;
-import com.example.warzone.controllers.exceptions.NerfsAndBuffsConflictException;
 import com.example.warzone.controllers.exceptions.NerfsAndBuffsNotFoundException;
 import com.example.warzone.dtos.NerfsAndBuffsDto;
 import com.example.warzone.models.NerfsAndBuffs;
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class NerfsAndBuffsServiceImpl implements NerfsAndBuffsService {
     private ModelMapper modelMapper;
-    NerfsAndBuffsRepository nerfsAndBuffsRepository;
+    private final NerfsAndBuffsRepository nerfsAndBuffsRepository;
 
     @Autowired
     public NerfsAndBuffsServiceImpl(NerfsAndBuffsRepository nerfsAndBuffsRepository, ModelMapper modelMapper) {
@@ -28,7 +27,9 @@ public class NerfsAndBuffsServiceImpl implements NerfsAndBuffsService {
 
     @Override
     public List<NerfsAndBuffsDto> getAll() {
-        return nerfsAndBuffsRepository.findAll().stream().map((s) -> modelMapper.map(s, NerfsAndBuffsDto.class)).collect(Collectors.toList());
+        return nerfsAndBuffsRepository.findAll().stream()
+                .map((s) -> modelMapper.map(s, NerfsAndBuffsDto.class))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -39,11 +40,11 @@ public class NerfsAndBuffsServiceImpl implements NerfsAndBuffsService {
     @Override
     public NerfsAndBuffsDto register(NerfsAndBuffsDto nerfsAndBuffsDto) {
         NerfsAndBuffs nerfsAndBuffs = modelMapper.map(nerfsAndBuffsDto, NerfsAndBuffs.class);
-        if (nerfsAndBuffs.getId() == null || nerfsAndBuffs.getId() == 0 || get(nerfsAndBuffs.getId()).isEmpty()) {
-            return modelMapper.map(nerfsAndBuffsRepository.save(nerfsAndBuffs), NerfsAndBuffsDto.class);
-        } else {
-            throw new NerfsAndBuffsConflictException("A nerfandbuff with this id already exists");
-        }
+
+        NerfsAndBuffs savedNerfsAndBuffs = nerfsAndBuffsRepository.save(nerfsAndBuffs);
+
+        nerfsAndBuffsDto.setId(savedNerfsAndBuffs.getId());
+        return nerfsAndBuffsDto;
     }
 
     @Override
@@ -74,8 +75,4 @@ public class NerfsAndBuffsServiceImpl implements NerfsAndBuffsService {
         return nerfsAndBuffsRepository.findAllByNameGun(nameGun).stream().map((s) -> modelMapper.map(s, NerfsAndBuffsDto.class)).collect(Collectors.toList());
     }
 
-    @Override
-    public List<NerfsAndBuffsDto> findAllByStatus(boolean status) {
-        return nerfsAndBuffsRepository.findAllByStatus(status).stream().map((s) -> modelMapper.map(s, NerfsAndBuffsDto.class)).collect(Collectors.toList());
-    }
 }

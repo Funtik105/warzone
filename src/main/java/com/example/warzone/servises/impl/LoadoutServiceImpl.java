@@ -5,6 +5,7 @@ import com.example.warzone.controllers.exceptions.LoadoutNotFoundException;
 import com.example.warzone.dtos.LoadoutDto;
 import com.example.warzone.models.Loadout;
 import com.example.warzone.repositories.LoadoutRepository;
+import com.example.warzone.repositories.UsersRepository;
 import com.example.warzone.servises.LoadoutService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,13 @@ import java.util.stream.Collectors;
 public class LoadoutServiceImpl implements LoadoutService {
     private ModelMapper modelMapper;
     LoadoutRepository loadoutRepository;
+    UsersRepository usersRepository;
 
     @Autowired
-    public LoadoutServiceImpl(LoadoutRepository loadoutRepository, ModelMapper modelMapper) {
+    public LoadoutServiceImpl(ModelMapper modelMapper, LoadoutRepository loadoutRepository, UsersRepository usersRepository) {
         this.modelMapper = modelMapper;
         this.loadoutRepository = loadoutRepository;
+        this.usersRepository = usersRepository;
     }
 
     @Override
@@ -38,11 +41,10 @@ public class LoadoutServiceImpl implements LoadoutService {
     @Override
     public LoadoutDto register(LoadoutDto loadoutDto) {
         Loadout loadout = modelMapper.map(loadoutDto, Loadout.class);
-        if (loadout.getId() == null || loadout.getId() == 0 || get(loadout.getId()).isEmpty()) {
-            return modelMapper.map(loadoutRepository.save(loadout), LoadoutDto.class);
-        } else {
-            throw new LoadoutConflictException("A loadout with this id already exists");
-        }
+        loadoutDto.setId(loadout.getId());
+        loadout.setUser(usersRepository.findById(loadoutDto.getId()).orElse(null));
+
+        return modelMapper.map(loadoutRepository.save(loadout), LoadoutDto.class);
     }
 
     @Override

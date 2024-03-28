@@ -23,6 +23,30 @@ public class Loadout extends Base {
     protected Loadout() {
     }
 
+    public List<LoadoutGun> getLoadoutGuns() {
+        return loadoutGuns;
+    }
+
+    public void setLoadoutGuns(List<LoadoutGun> loadoutGuns) {
+        this.loadoutGuns = loadoutGuns;
+    }
+
+    public List<Perks> getPerks() {
+        return perks;
+    }
+
+    public void setPerks(List<Perks> perks) {
+        this.perks = perks;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
     public String getPerks1() {
         return perks1;
     }

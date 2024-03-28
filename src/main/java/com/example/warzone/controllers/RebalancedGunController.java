@@ -1,16 +1,15 @@
 package com.example.warzone.controllers;
 
-import com.example.warzone.dtos.NerfsAndBuffsDto;
+import com.example.warzone.dtos.RebalancedGunDto;
 import com.example.warzone.dtos.response.FindResponse;
 import com.example.warzone.dtos.response.ResponseApi;
-import com.example.warzone.servises.NerfsAndBuffsService;
+import com.example.warzone.servises.RebalancedGunService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,22 +19,20 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
-@RequestMapping("/nerfsAndBuffs")
-public class NerfsAndBuffsController {
-    private NerfsAndBuffsService nerfsAndBuffsService;
-
-    @Autowired
-    public NerfsAndBuffsController(NerfsAndBuffsService nerfsAndBuffsService) {
-        this.nerfsAndBuffsService = nerfsAndBuffsService;
+@RequestMapping("/rebalancedGun")
+public class RebalancedGunController {
+    private RebalancedGunService rebalancedGunService;
+    public RebalancedGunController(RebalancedGunService rebalancedGunService) {
+        this.rebalancedGunService = rebalancedGunService;
     }
 
     @PostMapping("/new")
-    @Operation(summary = "Добавить новый нерф или бафф")
+    @Operation(summary = "Добавить новое перебалансированное оружие")
     @ApiResponses(
             value = {
                     @ApiResponse(
                             responseCode = "201",
-                            description = "Новый нерф или бафф успешно создано",
+                            description = "Новое перебалансированое оружие успешно создано",
                             content = @Content(
                                     mediaType = "application/json",
                                     examples = @ExampleObject(
@@ -47,22 +44,21 @@ public class NerfsAndBuffsController {
                     @ApiResponse(responseCode = "403", description = "Доступ запрещен")
             }
     )
-    public ResponseEntity<ResponseApi> createNerfsAndBuffs(
+    public ResponseEntity<ResponseApi> createRebalancedGun(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     content = @Content(
                             mediaType = "application/json",
                             examples = @ExampleObject(
-                                    description = "Новый нерф или бафф",
+                                    description = "Новое перебалансирование оружие",
                                     value = "{\"name\": \"Kastov 545\", \"category\": \"Assault Rifles\", \"gameRepresents\": \"MW2\"}" // TODO: Поправить свагер
                             )
                     )
             )
+            @RequestBody RebalancedGunDto rebalancedGun) {
+            RebalancedGunDto savedRebalancedGun = rebalancedGunService.register(rebalancedGun);
 
-            @RequestBody NerfsAndBuffsDto nerfsAndBuffs) {
-        NerfsAndBuffsDto savedNerfsAndBuffs = nerfsAndBuffsService.register(nerfsAndBuffs);
-
-        ResponseApi response = new ResponseApi(savedNerfsAndBuffs.getId(), new ArrayList<>());
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+            ResponseApi response = new ResponseApi(savedRebalancedGun.getId(), new ArrayList<>());
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/find")
@@ -80,26 +76,18 @@ public class NerfsAndBuffsController {
                             )
                     ),
                     @ApiResponse(responseCode = "400", description = "Неверный запрос"),
-                    @ApiResponse(responseCode = "404", description = "Нерф или бафф не найден")
+                    @ApiResponse(responseCode = "404", description = "Перебалансирование оружие не найдено")
             }
     )
-    public ResponseEntity<?> find(
-            @RequestParam(required = false) String nameGun) {
-
-        if (nameGun != null) {
-            List<NerfsAndBuffsDto> nerfsAndBuffs = nerfsAndBuffsService.findAllByNameGun(nameGun);
-            return buildFindNerfsAndBuffsResponse(nerfsAndBuffs);
-        } else {
-            // If no parameters are passed, return a list of all weapons
-            List<NerfsAndBuffsDto> nerfsAndBuffs = nerfsAndBuffsService.getAll();
-            return buildFindNerfsAndBuffsResponse(nerfsAndBuffs);
-        }
+    public ResponseEntity<?> find() {
+        List<RebalancedGunDto> rebalancedGun = rebalancedGunService.getAll();
+        return buildFindRebalancedGunsResponse(rebalancedGun);
     }
 
-    private ResponseEntity<FindResponse<NerfsAndBuffsDto>> buildFindNerfsAndBuffsResponse(List<NerfsAndBuffsDto> nerfsAndBuffs) {
+    private ResponseEntity<FindResponse<RebalancedGunDto>> buildFindRebalancedGunsResponse(List<RebalancedGunDto> rebalancedGuns) {
         FindResponse response = new FindResponse();
-        response.setTotalCount(nerfsAndBuffs.size());
-        response.setBody(nerfsAndBuffs);
+        response.setTotalCount(rebalancedGuns.size());
+        response.setBody(rebalancedGuns);
         response.setErrors(new ArrayList<>());
         return ResponseEntity.ok(response);
     }
@@ -109,18 +97,18 @@ public class NerfsAndBuffsController {
     @Operation(summary = "Удалить по id")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Нерф или бафф успешно обновлено"),
+                    @ApiResponse(responseCode = "200", description = "Перебалансирование оружие успешно обновлено"),
                     @ApiResponse(responseCode = "400", description = "Неверный запрос"),
                     @ApiResponse(responseCode = "403", description = "Доступ запрещён"),
-                    @ApiResponse(responseCode = "404", description = "Нерф или бафф не найден")
+                    @ApiResponse(responseCode = "404", description = "Перебалансирование оружие не найдено")
             }
     )
     public ResponseEntity<ResponseApi> delete(
-            @Parameter(description = "Имя нерфа или бафа", example = "Нерф Kastov545")
+            @Parameter(description = "Имя перебалансированого оружия", example = "Interstellar")
             @RequestParam Long id
     ) {
         try {
-            nerfsAndBuffsService.delete(id);
+            rebalancedGunService.delete(id);
             // Успешное выполнение
             return ResponseEntity.ok(new ResponseApi(true, new ArrayList<>()));
         } catch (Exception e) {
