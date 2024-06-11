@@ -2,21 +2,18 @@ package com.example.warzone.models;
 
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;;
 
 import java.util.List;
 
 
 @Entity
-@Table(name = "nerfs_and_buffs")
 public class NerfsAndBuffs extends Base {
     private String date;
     private String patchName;
     @OneToMany(mappedBy = "nerfsAndBuffs")
     private List<RebalancedGun> rebalancedGun;
-
-    protected NerfsAndBuffs() {
+    public NerfsAndBuffs() {
     }
 
     public String getPatchName() {

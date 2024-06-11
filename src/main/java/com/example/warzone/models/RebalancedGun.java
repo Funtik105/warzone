@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "rebalanced_gun")
 public class RebalancedGun extends Base{
     private boolean status;
     @ElementCollection
@@ -17,7 +16,7 @@ public class RebalancedGun extends Base{
     @JoinColumn(name = "gun_id")
     private Gun gun;
 
-    protected RebalancedGun() {
+    public RebalancedGun() {
     }
 
     public boolean isStatus() {

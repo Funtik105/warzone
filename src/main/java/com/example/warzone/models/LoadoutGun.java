@@ -115,4 +115,9 @@ public class LoadoutGun extends Base {
     public void setAttachment_5(String attachment_5) {
         this.attachment_5 = attachment_5;
     }
+    public static LoadoutGun createLoadoutGun(){
+        LoadoutGun loadoutGun = new LoadoutGun();
+        loadoutGun.setId(1L);
+        return loadoutGun;
+    }
 }

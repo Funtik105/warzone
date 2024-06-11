@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "gun")
 public class Gun extends Base {
     @OneToMany(mappedBy = "gun")
     private List<RebalancedGun> rebalancedGun;
@@ -13,11 +12,21 @@ public class Gun extends Base {
     private LoadoutGun loadoutGun;
     @OneToMany(mappedBy = "gun")
     private List<Camo> camo;
+    @OneToOne(mappedBy = "gun")
+    private Attachments attachments;
     private String name;
     private String category;
     private String gameRepresents;
 
     protected Gun() {
+    }
+
+    public Attachments getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(Attachments attachments) {
+        this.attachments = attachments;
     }
 
     public String getName() {
@@ -66,5 +75,10 @@ public class Gun extends Base {
 
     public void setGameRepresents(String gameRepresents) {
         this.gameRepresents = gameRepresents;
+    }
+    public static Gun createGun(){
+        Gun gun = new Gun();
+        gun.setId(1L);
+        return gun;
     }
 }

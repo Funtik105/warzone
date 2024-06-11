@@ -1,22 +1,29 @@
 package com.example.warzone.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.List;
+
 public class AttachmentsDto {
     private Long id;
+    @JsonIgnore
     private LoadoutGunDto loadoutGun;
     private String name;
-    private String weaponsToOpen;
-    private short levelsToOpen;
-    private String advantages;
-    private String disadvantages;
+    private GunDto gun;
+    private String type;
+    private Integer levelsToOpen;
+    private List<String> advantages;
+    private List<String> disadvantages;
 
-    protected AttachmentsDto() {
+    public AttachmentsDto() {
     }
 
-    public AttachmentsDto(Long id, LoadoutGunDto loadoutGun, String name, String weaponsToOpen, short levelsToOpen, String advantages, String disadvantages) {
+    public AttachmentsDto(Long id, LoadoutGunDto loadoutGun, String name, GunDto gun, String type, Integer levelsToOpen, List<String> advantages, List<String> disadvantages) {
         this.id = id;
         this.loadoutGun = loadoutGun;
         this.name = name;
-        this.weaponsToOpen = weaponsToOpen;
+        this.gun = gun;
+        this.type = type;
         this.levelsToOpen = levelsToOpen;
         this.advantages = advantages;
         this.disadvantages = disadvantages;
@@ -46,47 +53,43 @@ public class AttachmentsDto {
         this.name = name;
     }
 
-    public String getWeaponsToOpen() {
-        return weaponsToOpen;
+    public GunDto getGun() {
+        return gun;
     }
 
-    public void setWeaponsToOpen(String weaponsToOpen) {
-        this.weaponsToOpen = weaponsToOpen;
+    public void setGun(GunDto gun) {
+        this.gun = gun;
     }
 
-    public short getLevelsToOpen() {
+    public Integer getLevelsToOpen() {
         return levelsToOpen;
     }
 
-    public void setLevelsToOpen(short levelsToOpen) {
+    public void setLevelsToOpen(Integer levelsToOpen) {
         this.levelsToOpen = levelsToOpen;
     }
 
-    public String getAdvantages() {
+    public List<String> getAdvantages() {
         return advantages;
     }
 
-    public void setAdvantages(String advantages) {
+    public void setAdvantages(List<String> advantages) {
         this.advantages = advantages;
     }
 
-    public String getDisadvantages() {
+    public List<String> getDisadvantages() {
         return disadvantages;
     }
 
-    public void setDisadvantages(String disadvantages) {
+    public void setDisadvantages(List<String> disadvantages) {
         this.disadvantages = disadvantages;
     }
 
-    @Override
-    public String toString() {
-        return "AttachmentsDto{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", weaponsToOpen='" + weaponsToOpen + '\'' +
-                ", levelsToOpen=" + levelsToOpen +
-                ", advantages='" + advantages + '\'' +
-                ", disadvantages='" + disadvantages + '\'' +
-                '}';
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

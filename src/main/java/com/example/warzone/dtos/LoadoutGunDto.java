@@ -1,10 +1,13 @@
 package com.example.warzone.dtos;
 
+import java.util.List;
+
 public class LoadoutGunDto {
     private Long id;
     private GunDto gun;
     private LoadoutDto loadout;
     private MetaListDto metaList;
+    private List<AttachmentsDto> attachments;
     private String name;
     private String range;
     private String attachment_1;
@@ -13,14 +16,15 @@ public class LoadoutGunDto {
     private String attachment_4;
     private String attachment_5;
 
-    protected LoadoutGunDto() {
+    public LoadoutGunDto() {
     }
 
-    public LoadoutGunDto(Long id, GunDto gun, LoadoutDto loadout, MetaListDto metaList, String name, String range, String attachment_1, String attachment_2, String attachment_3, String attachment_4, String attachment_5) {
+    public LoadoutGunDto(Long id, GunDto gun, LoadoutDto loadout, MetaListDto metaList, List<AttachmentsDto> attachments, String name, String range, String attachment_1, String attachment_2, String attachment_3, String attachment_4, String attachment_5) {
         this.id = id;
         this.gun = gun;
         this.loadout = loadout;
         this.metaList = metaList;
+        this.attachments = attachments;
         this.name = name;
         this.range = range;
         this.attachment_1 = attachment_1;
@@ -28,6 +32,14 @@ public class LoadoutGunDto {
         this.attachment_3 = attachment_3;
         this.attachment_4 = attachment_4;
         this.attachment_5 = attachment_5;
+    }
+
+    public List<AttachmentsDto> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(List<AttachmentsDto> attachments) {
+        this.attachments = attachments;
     }
 
     public Long getId() {

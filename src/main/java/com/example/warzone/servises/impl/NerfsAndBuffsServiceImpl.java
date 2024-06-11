@@ -65,10 +65,6 @@ public class NerfsAndBuffsServiceImpl implements NerfsAndBuffsService {
         }
     }
 
-    @Override
-    public List<NerfsAndBuffsDto> findAllByDate(String date) {
-        return nerfsAndBuffsRepository.findAllByDate(date).stream().map((s) -> modelMapper.map(s, NerfsAndBuffsDto.class)).collect(Collectors.toList());
-    }
 
     @Override
     public List<NerfsAndBuffsDto> findAllByNameGun(String nameGun) {

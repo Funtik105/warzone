@@ -1,5 +1,7 @@
 package com.example.warzone.dtos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.List;
 
 public class NerfsAndBuffsDto {
@@ -8,9 +10,10 @@ public class NerfsAndBuffsDto {
     private List<RebalancedGunDto> rebalancedGun;
     private String date;
 
-    public NerfsAndBuffsDto(Long id,String patchName, String date) {
+    public NerfsAndBuffsDto(Long id, String patchName, List<RebalancedGunDto> rebalancedGun, String date) {
         this.id = id;
         this.patchName = patchName;
+        this.rebalancedGun = rebalancedGun;
         this.date = date;
     }
 

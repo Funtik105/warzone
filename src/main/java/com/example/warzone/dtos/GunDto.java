@@ -6,7 +6,7 @@ public class GunDto {
     private String category;
     private String gameRepresents;
 
-    protected GunDto() {
+    public GunDto() {
     }
 
     public GunDto(Long id, String name, String category, String gameRepresents) {

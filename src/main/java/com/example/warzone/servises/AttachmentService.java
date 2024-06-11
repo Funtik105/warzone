@@ -18,11 +18,7 @@ public interface AttachmentService {
 
     List<AttachmentsDto> findAllByWeaponsToOpen(String weaponsToOpen);
 
-    List<AttachmentsDto> findAllByLevelsToOpen(short levelsToOpen);
-
-    List<AttachmentsDto> findAllByAdvantages(String advantages);
-
-    List<AttachmentsDto> findAllByDisadvantages(String disadvantages);
+    List<AttachmentsDto> findAllByLevelsToOpen(Integer levelsToOpen);
 
     void delete(Long id);
 }

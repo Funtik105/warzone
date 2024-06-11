@@ -16,8 +16,6 @@ public interface NerfsAndBuffsService {
 
     void delete(Long id);
 
-    List<NerfsAndBuffsDto> findAllByDate(String date);
-
     List<NerfsAndBuffsDto> findAllByNameGun(String nameGun);
 
 }

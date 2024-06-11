@@ -1,27 +1,25 @@
 package com.example.warzone.dtos;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
 
 public class RebalancedGunDto {
     private Long id;
     private boolean status;
-
     private List<String> changes;
-    @JsonIgnore
-    private NerfsAndBuffsDto nerfsAndBuffs;
+    private Long nerfsAndBuffsId;
     private GunDto gun;
 
-    protected RebalancedGunDto() {
+    public RebalancedGunDto() {
     }
 
-    public RebalancedGunDto(Long id, boolean status, List<String> changes, NerfsAndBuffsDto nerfsAndBuffs, GunDto gun) {
+    public RebalancedGunDto(Long id, boolean status, List<String> changes, Long nerfsAndBuffsId, GunDto gun) {
         this.id = id;
         this.status = status;
         this.changes = changes;
-        this.nerfsAndBuffs = nerfsAndBuffs;
+        this.nerfsAndBuffsId = nerfsAndBuffsId;
         this.gun = gun;
     }
 
@@ -57,12 +55,12 @@ public class RebalancedGunDto {
         this.gun = gun;
     }
 
-    public NerfsAndBuffsDto getNerfsAndBuffs() {
-        return nerfsAndBuffs;
+    public Long getNerfsAndBuffsId() {
+        return nerfsAndBuffsId;
     }
 
-    public void setNerfsAndBuffs(NerfsAndBuffsDto nerfsAndBuffs) {
-        this.nerfsAndBuffs = nerfsAndBuffs;
+    public void setNerfsAndBuffsId(Long nerfsAndBuffsId) {
+        this.nerfsAndBuffsId = nerfsAndBuffsId;
     }
 
     @Override
@@ -71,7 +69,7 @@ public class RebalancedGunDto {
                 "id=" + id +
                 ", status=" + status +
                 ", changes=" + changes +
-                ", nerfsAndBuffs=" + nerfsAndBuffs +
+                ", nerfsAndBuffsId=" + nerfsAndBuffsId +
                 ", gun=" + gun +
                 '}';
     }

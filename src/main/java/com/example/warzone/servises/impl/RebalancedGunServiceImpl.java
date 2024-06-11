@@ -1,6 +1,5 @@
 package com.example.warzone.servises.impl;
 
-import com.example.warzone.dtos.GunDto;
 import com.example.warzone.dtos.NerfsAndBuffsDto;
 import com.example.warzone.dtos.RebalancedGunDto;
 import com.example.warzone.models.Gun;
@@ -44,14 +43,31 @@ public class RebalancedGunServiceImpl implements RebalancedGunService {
         return Optional.ofNullable(modelMapper.map(rebalancedGunRepository.findById(id), RebalancedGunDto.class));
     }
 
+
     @Override
     public RebalancedGunDto register(RebalancedGunDto rebalancedGunDto) {
-        RebalancedGun rebalancedGun = modelMapper.map(rebalancedGunDto, RebalancedGun.class);
-        rebalancedGun.setGun(gunRepository.findById(rebalancedGunDto.getId()).orElse(null));
-        rebalancedGun.setNerfsAndBuffs(nerfsAndBuffsRepository.findById(rebalancedGunDto.getId()).orElse(null));
+        Long nerfsAndBuffsId = rebalancedGunDto.getNerfsAndBuffsId();
+        Long gunId = rebalancedGunDto.getGun().getId();
 
-        return modelMapper.map(rebalancedGunRepository.save(rebalancedGun), RebalancedGunDto.class);
+        if (nerfsAndBuffsId == null || gunId == null) {
+            throw new IllegalArgumentException("NerfsAndBuffsId and GunId must not be null");
+        }
+
+        NerfsAndBuffs nerfsAndBuffs = nerfsAndBuffsRepository.findById(nerfsAndBuffsId)
+                .orElseThrow(() -> new IllegalArgumentException("NerfsAndBuffs не найден"));
+
+        Gun gun = gunRepository.findById(gunId)
+                .orElseThrow(() -> new IllegalArgumentException("Gun не найден"));
+
+        RebalancedGun rebalancedGun = modelMapper.map(rebalancedGunDto, RebalancedGun.class);
+        rebalancedGun.setGun(gun);
+        rebalancedGun.setNerfsAndBuffs(nerfsAndBuffs);
+
+        RebalancedGun savedRebalancedGun = rebalancedGunRepository.save(rebalancedGun);
+
+        return modelMapper.map(savedRebalancedGun, RebalancedGunDto.class);
     }
+
 
     @Override
     public void delete(Long id) {

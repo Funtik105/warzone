@@ -5,6 +5,7 @@ import com.example.warzone.controllers.exceptions.AttachmentNotFoundException;
 import com.example.warzone.dtos.AttachmentsDto;
 import com.example.warzone.models.Attachments;
 import com.example.warzone.repositories.AttachmentRepository;
+import com.example.warzone.repositories.LoadoutGunRepository;
 import com.example.warzone.servises.AttachmentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +19,20 @@ import java.util.stream.Collectors;
 public class AttachmentServiceImpl implements AttachmentService {
     private ModelMapper modelMapper;
     AttachmentRepository attachmentRepository;
+    LoadoutGunRepository loadoutGunRepository;
 
     @Autowired
-    public AttachmentServiceImpl(AttachmentRepository attachmentRepository, ModelMapper modelMapper) {
+    public AttachmentServiceImpl(AttachmentRepository attachmentRepository, LoadoutGunRepository loadoutGunRepository, ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
         this.attachmentRepository = attachmentRepository;
+        this.loadoutGunRepository = loadoutGunRepository;
     }
 
     @Override
     public List<AttachmentsDto> getAll() {
-        return attachmentRepository.findAll().stream().map((s) -> modelMapper.map(s, AttachmentsDto.class)).collect(Collectors.toList());
+        return attachmentRepository.findAll().stream()
+                .map((s) -> modelMapper.map(s, AttachmentsDto.class))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -74,17 +79,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     @Override
-    public List<AttachmentsDto> findAllByLevelsToOpen(short levelsToOpen) {
+    public List<AttachmentsDto> findAllByLevelsToOpen(Integer levelsToOpen) {
         return attachmentRepository.findAllByLevelsToOpen(levelsToOpen).stream().map((s) -> modelMapper.map(s, AttachmentsDto.class)).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<AttachmentsDto> findAllByAdvantages(String advantages) {
-        return attachmentRepository.findAllByAdvantages(advantages).stream().map((s) -> modelMapper.map(s, AttachmentsDto.class)).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<AttachmentsDto> findAllByDisadvantages(String disadvantages) {
-        return attachmentRepository.findAllByDisadvantages(disadvantages).stream().map((s) -> modelMapper.map(s, AttachmentsDto.class)).collect(Collectors.toList());
     }
 }

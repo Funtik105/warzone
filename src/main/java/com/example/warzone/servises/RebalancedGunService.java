@@ -13,5 +13,4 @@ public interface RebalancedGunService {
     RebalancedGunDto register(RebalancedGunDto rebalancedGunDto);
 
     void delete(Long id);
-
 }
