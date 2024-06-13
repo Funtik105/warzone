@@ -19,9 +19,8 @@ public class Attachments extends Base {
     @ElementCollection
     private List<String> disadvantages;
 
-//    protected Attachments() {
-//    }
-    public Attachments(){}
+    public Attachments() {
+    }
 
     public LoadoutGun getLoadoutGun() {
         return loadoutGun;
@@ -78,6 +77,7 @@ public class Attachments extends Base {
     public void setType(String type) {
         this.type = type;
     }
+
     public static Attachments createAttachment() {
         Attachments attachment = new Attachments();
         return attachment;

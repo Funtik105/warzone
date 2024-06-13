@@ -1,6 +1,5 @@
 package com.example.warzone.controllers;
 
-import com.example.warzone.controllers.exceptions.AttachmentNotFoundException;
 import com.example.warzone.dtos.AttachmentsDto;
 import com.example.warzone.dtos.response.FindResponse;
 import com.example.warzone.dtos.response.ResponseApi;
